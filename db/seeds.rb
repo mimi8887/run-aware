@@ -10,6 +10,10 @@
 puts 'destroy all records'
 Route.destroy_all
 
+puts 'create steps'
+
+Step.create(longitude: )
+
 puts 'create routes'
 
 Route.create(name: "Kreuzberg Park Loop", distance: 5, address: "Großbeerenstraße 32, 10965 Berlin",

@@ -7,6 +7,10 @@ class RoutesController < ApplicationController
     @route = Route.new
   end
 
+  def show
+    @route = Route.find(params[:id])
+  end
+
   def create
       @route = Route.new(route_params)
       @route.user = current_user

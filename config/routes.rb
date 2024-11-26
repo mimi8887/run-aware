@@ -9,4 +9,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  resources :routes, only: %i[index show create new] do
+    resources :runs, only: %i[show new create update add_endtime]
+    resources :bookmarks, only: %i[index show new create]
+  end
 end

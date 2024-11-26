@@ -10,9 +10,57 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_26_113118) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_26_115745) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "route_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["route_id"], name: "index_bookmarks_on_route_id"
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "routes", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.float "distance"
+    t.float "starting_longitude"
+    t.float "starting_latitude"
+    t.float "ending_longitude"
+    t.float "ending_latitude"
+    t.string "address"
+    t.bigint "step_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["step_id"], name: "index_routes_on_step_id"
+    t.index ["user_id"], name: "index_routes_on_user_id"
+  end
+
+  create_table "runs", force: :cascade do |t|
+    t.time "starting_time"
+    t.time "ending_time"
+    t.string "weather"
+    t.string "tips"
+    t.string "description"
+    t.bigint "user_id", null: false
+    t.bigint "route_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["route_id"], name: "index_runs_on_route_id"
+    t.index ["user_id"], name: "index_runs_on_user_id"
+  end
+
+  create_table "steps", force: :cascade do |t|
+    t.float "longitude"
+    t.float "latitude"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +70,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_26_113118) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookmarks", "routes"
+  add_foreign_key "bookmarks", "users"
+  add_foreign_key "routes", "steps"
+  add_foreign_key "routes", "users"
+  add_foreign_key "runs", "routes"
+  add_foreign_key "runs", "users"
 end

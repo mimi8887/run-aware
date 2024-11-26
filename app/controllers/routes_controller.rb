@@ -1,6 +1,13 @@
 class RoutesController < ApplicationController
   def index
     @routes = Route.all
+    @markers = [
+      { lat: 52.493325, lng: 13.383275 },
+      { lat: 52.482100, lng: 13.393700 },
+      { lat: 52.487800, lng: 13.416800 },
+      { lat: 52.500500, lng: 13.405200 },
+      { lat: 52.493325, lng: 13.383275 }
+    ]
   end
 
   def new

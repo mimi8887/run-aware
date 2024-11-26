@@ -20,7 +20,8 @@ Step.create(longitude: 13.3958819, latitude: 52.5191864, position: 0, route: kre
 puts 'create routes'
 
 kreuzberg = Route.create(name: "Kreuzberg Park Loop", distance: 5,
-             description: "A scenic loop through Kreuzberg’s lush parks, ideal for a relaxing run on sunny afternoons.")
+                         description: "A scenic loop through Kreuzberg’s lush parks,
+                         ideal for a relaxing run on sunny afternoons.")
 Route.create(name: "Prenzlauer Berg Pathway", distance: 10,
              description: "Explore the charming streets and tree-lined paths of Prenzlauer Berg,
               perfect for crisp autumn mornings.")

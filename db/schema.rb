@@ -32,8 +32,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_26_143940) do
     t.datetime "updated_at", null: false
     t.string "start_address"
     t.string "end_address"
-    t.bigint "route_id", null: false
-    t.index ["route_id"], name: "index_routes_on_route_id"
     t.index ["user_id"], name: "index_routes_on_user_id"
   end
 
@@ -77,7 +75,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_26_143940) do
 
   add_foreign_key "bookmarks", "routes"
   add_foreign_key "bookmarks", "users"
-  add_foreign_key "routes", "routes"
   add_foreign_key "routes", "users"
   add_foreign_key "runs", "routes"
   add_foreign_key "runs", "users"

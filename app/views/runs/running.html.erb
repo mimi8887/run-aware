@@ -1,0 +1,2 @@
+<h1><%= @run.route.name %></h1>
+<%= link_to 'Stop run',  end_run_path(@run), data: { turbo_method: :patch}, class: 'btn btn-primary' %>

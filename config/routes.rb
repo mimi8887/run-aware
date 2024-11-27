@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   # root "posts#index"
 
     resources :routes, only: %i[index new create show results]
-    
+    get "style", to: "pages#style"
 end

@@ -1,9 +1,21 @@
-.navbar-runware {
+.navbar-runware-parent {
   justify-content: space-between;
   background: #F5F5F5;
+  height: 72px;
+  padding: 0px 8px;
 }
 
-.navbar-runware .navbar-collapse {
+.navbar-runware-parent .navbar-collapse {
   flex-grow: 0;
 }
 
+.navbar-runware-child {
+  justify-content: space-between;
+  background: #F5F5F5;
+  height: 80px;
+  padding: 0px 8px;
+}
+
+.navbar-runware-parent .runware-child {
+  flex-grow: 0;
+}

@@ -1,0 +1,32 @@
+.btn-text {
+  padding: 16px 8px;
+  transition: opacity 0.3s ease;
+  color: #553BD9;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.btn-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0px;
+  text-decoration: none;
+  color: #553BD9;
+  font-weight: bold;
+  transition: opacity 0.3s ease;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.btn-with-icon:hover {
+  color: #001DB8;
+}
+
+.btn-with-icon i {
+  font-size: 16px;
+}
+
+.btn-with-icon .btn-text {
+  text-decoration: none;
+}

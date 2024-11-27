@@ -1,0 +1,8 @@
+
+
+<h1><%= @route.name %></h1>
+
+<p><strong>Descrição:</strong> <%= @route.description %></p>
+<p><strong>Distância:</strong> <%= @route.distance %> km</p>
+
+<%= link_to 'Voltar para a lista de rotas',  new_route_path, class: 'btn btn-primary' %>

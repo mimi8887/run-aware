@@ -10,10 +10,13 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body><%= render "shared/navbar" %>
-<%= render "shared/flashes" %>
-<div class="m-5">
+  <body>
+  <% if controller_name == "pages" && action_name == "home" %>
+  <h1>Hello from homepage</h1>
+  <% end %>
+  <div class="container-page">
     <%= yield %>
-</div>
+  </div>
+
   </body>
 </html>

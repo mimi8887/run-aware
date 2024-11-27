@@ -5,14 +5,16 @@
   data-map-markers-value="<%= @routes %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 <%= link_to 'Nova Rota', new_route_path, class: 'btn btn-primary' %>
+
 <h2>Suggestions</h2>
-
-
-  <div class="cards_container">
-    <% @routes.each do |route| %>
-         <div class="route-card">
-      <h3><%= route.name %></h3>
-      <p><%= route.description %></p>
-      <p><strong>Distância:</strong> <%= route.distance %> km</p>
-    </div>
+<div class="cards_container">
+  <% @routes.each do |route| %>
+    <%= link_to route_path(route) do %>
+      <div class="route-card">
+        <h3><%= route.name %></h3>
+        <p><%= route.description %></p>
+        <p><strong>Distância:</strong> <%= route.distance %> km</p>
+      </div>
+    <% end %>
   <% end %>
+</div>

@@ -10,6 +10,17 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-    resources :routes, only: %i[index new create show]
-    get '/results', to: 'routes#results', as: :results
+
+  resources :routes, only: %i[index new create show results] do
+    resources :runs, only: %i[create ] do
+      get '/running', to: 'runs#running', as: :running
+    end
+  end
+
+  get '/results', to: 'routes#results', as: :results
+  patch '/end_run/:id', to: 'runs#end_run', as: :end_run
+  resources :runs, only: %i[edit update show]
+  get "style", to: "pages#style"
+
+
 end

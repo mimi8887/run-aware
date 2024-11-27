@@ -18,7 +18,6 @@ class RoutesController < ApplicationController
       @route = Route.new(route_params)
       @route.user = current_user
       @route.save
-    raise
       redirect_to routes_path
   end
 

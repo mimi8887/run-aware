@@ -15,6 +15,7 @@ user1 = User.create(email: "fernanda@gmail.com", password: "123456")
 user2 = User.create(email: "natalia@gmail.com", password: "123456")
 user3 = User.create(email: "sinome@gmail.com", password: "123456")
 
+
 puts 'create routes'
 
 Route.create(name: "Kreuzberg Park Loop", distance: 5,
@@ -28,10 +29,10 @@ Route.create(name: "Charlottenburg Canal Run", distance: 25,
               great for peaceful evening jogs by the water", user: user3)
 Route.create(name: "Mitte Skyline Sprint", distance: 15,
              description: "Dash through Berlin’s vibrant city center with
-             views of iconic landmarks—best enjoyed during a clear, breezy day.")
+             views of iconic landmarks—best enjoyed during a clear, breezy day.", user: user1)
 Route.create(name: "Tempelhof Track Trail", distance: 5,
              description: "Run on the historic Tempelhof airfield,
-               a wide-open route perfect for windy or overcast days.")
+               a wide-open route perfect for windy or overcast days.", user: user3)
 
 puts "created #{Route.count} routes"
 puts "created #{User.count} user"

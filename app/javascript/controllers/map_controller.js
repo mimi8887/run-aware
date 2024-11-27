@@ -14,75 +14,50 @@ export default class extends Controller {
     this.map = new mapboxgl.Map({
       container: this.element,
       style: "mapbox://styles/mapbox/streets-v10",
-      center: [-122.68035572839027, 45.52729517240144],
-      zoom: 10
+      // center: [-122.68035572839027, 45.52729517240144],
+      center: [13.413738, 52.522941],
+      zoom: 15
     })
-    this.map.on('load', () => {
 
-      this.map.addLayer({
-        id: 'route',
-        type: 'line',
-        source: {
-          'type': 'geojson',
-          'data': {
-            'type': 'Feature',
-            'properties': {},
-            'geometry': {
-              'type': 'LineString',
-              'coordinates': [
-                [
-                  -122.68035572839027,
-                  45.52729517240144
-                ],
-                [
-                  -122.67657260381876,
-                  45.527330174436116
-                ],
-                [
-                  -122.67657129671815,
-                  45.52666556739695
-                ],
-                [
-                  -122.67085005715236,
-                  45.52677044480427
-                ],
-                [
-                  -122.66645605237485,
-                  45.52862702776275
-                ],
-                [
-                  -122.66560830926798,
-                  45.52866212597536
-                ],
-                [
-                  -122.66532421497476,
-                  45.52712020010674
-                ],
-                [
-                  -122.6654770006126,
-                  45.52158881104725
-                ],
-                [
-                  -122.66684678096325,
-                  45.51749007039993
-                ]
-              ],
+    const start = [13.413738, 52.522941];
+    const end = [13.390439, 52.507398];
+    const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        const route = data.routes[0].geometry.coordinates;
+        console.log(route)
+        this.map.on('load', () => {
+
+          this.map.addLayer({
+            id: 'route',
+            type: 'line',
+            source: {
+              'type': 'geojson',
+              'data': {
+                'type': 'Feature',
+                'properties': {},
+                'geometry': {
+                  'type': 'LineString',
+                  'coordinates':
+                   route
+                  ,
+                },
+              }
             },
-          }
-        },
-        layout: {
-          'line-join': 'round',
-          'line-cap': 'round'
-        },
-        paint: {
-          'line-color': '#888',
-          'line-width': 8
-        }
-      })
-    })
+            layout: {
+              'line-join': 'round',
+              'line-cap': 'round'
+            },
+            paint: {
+              'line-color': '#888',
+              'line-width': 4
+            }
+          })
+        })
 
-    this.#addMarkersToMap()
-    // this.#fitMapToMarkers()
+      });
   }
 
   #addMarkersToMap() {

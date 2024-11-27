@@ -2,12 +2,17 @@ class RoutesController < ApplicationController
   def index
     @routes = Route.all
     @markers = [
-      { lat: 52.493325, lng: 13.383275 },
-      { lat: 52.482100, lng: 13.393700 },
-      { lat: 52.487800, lng: 13.416800 },
-      { lat: 52.500500, lng: 13.405200 },
-      { lat: 52.493325, lng: 13.383275 }
-    ]
+      { lat: 52.48773804724966, lng: 13.383683784580231 },
+      { lat: 52.486351472937, lng: 13.389951169490814 },
+      { lat: 52.481837907201206, lng: 13.395120670145922 },
+      { lat: 52.47744842474273, lng: 13.400204121177599 },
+      { lat: 52.47180112114213, lng: 13.399752206313258 },
+      { lat: 52.46844896928392, lng: 13.394121190369173 },
+      { lat: 52.47068324803367, lng: 13.387429690144542 },
+      { lat: 52.47542334706799, lng: 13.380502925276214 },
+      { lat: 52.48280001108698, lng: 13.379095245741312 },
+      { lat: 52.48773804724966, lng: 13.383683784580231 }
+      ]
   end
 
   def new
@@ -16,6 +21,8 @@ class RoutesController < ApplicationController
 
   def show
     @route = Route.find(params[:id])
+    @start_address = @route.start_address
+    @end_address = @route.end_address
   end
 
   def create
@@ -28,7 +35,7 @@ class RoutesController < ApplicationController
   private
 
   def route_params
-    params.require(:route).permit(:name, :description)
+    params.require(:route).permit(:start_address, :end_address)
   end
 
   def results

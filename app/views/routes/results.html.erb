@@ -1,0 +1,11 @@
+
+<h1>Your results</h1>
+<% if @route %>
+  <p><strong>Name:</strong> <%= @route.name %></p>
+  <p><strong>Distance:</strong> <%= @route.distance %> miles</p>
+  <p><strong>Location:</strong> <%= @route.location %></p>
+  <p><strong>Difficulty:</strong> <%= @route.difficulty_level %></p>
+<% else %>
+  <p>No routes available.</p>
+<% end %>
+<a href="<%= random_route_path %>">Show Another Random Route</a>

@@ -23,4 +23,9 @@ class RoutesController < ApplicationController
   def route_params
     params.require(:route).permit(:name, :description)
   end
+
+  def results
+    results@routes= Route.order("RESULT()").first
+  end
+
 end

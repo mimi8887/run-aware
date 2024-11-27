@@ -8,9 +8,13 @@ user3 = User.create(email: "sinome@gmail.com", password: "123456")
 
 puts 'create routes'
 
-Route.create(name: "Kreuzberg Park Loop", distance: 5,
-             description: "A scenic loop through Kreuzberg's lush parks, ideal for a relaxing run on sunny afternoons.",
-             user: user1, start_address: "Großbeerenstraße 32", end_address:)
+kreuzberg_run = Route.create(name: "Kreuzberg Park Loop", distance: 5,
+                             description: "A scenic loop through Kreuzberg's lush parks, ideal for a relaxing run on sunny afternoons.",
+                             user: user1, start_address: "Großbeerenstraße 32", end_address: "Hermannstraße 233")
+
+Step.create(latitude: 52.494086642408476, longitude: 13.382394043903366, position: 0, route: kreuzberg_run)
+Step.create(latitude: 52.47767881020902, longitude: 13.426737267736522, position: 1, route: kreuzberg_run)
+
 Route.create(name: "Prenzlauer Berg Pathway", distance: 10,
              description: "Explore the charming streets and tree-lined paths of Prenzlauer Berg,
               perfect for crisp autumn mornings.", user: user2)

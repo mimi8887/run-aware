@@ -2,15 +2,47 @@
 <h2>Testing</h2>
 
 <%# NAV BAR PARENT PAGE%>
-<div class="navbar navbar-expand-sm navbar-light navbar-runware">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <%= image_tag "logo.png", alt: "Logo", width: 120, height: 24 %>
-</a>
+  <div class="navbar navbar-expand-sm navbar-light navbar-runware-parent">
+    <div class="container-fluid">
+      <a  href="">
+        <%= image_tag "logo.png", alt: "Logo", width: 120, height: 24 %>
+      </a>
+    </div>
   </div>
-</div>
 
+<%# NAV BAR CHILD PAGE%>
+  <div class="navbar navbar-expand-sm navbar-light navbar-runware-child">
+    <div class="container-fluid">
+      <div>
+        <a href= "">
+          <div class="btn-with-icon">
+          <i class="fa-solid fa-angle-left"></i>
+          <a class="btn-text" href="#">Back</a>
+        </div>
+        </a>
+      </div>
+      <a href="" class="fa-solid fa-xmark"></a>
+    </div>
+  </div>
 
 
 <%# Button %>
-<a class="btn btn-invisible" href="#">Back</a>
+  <div class="btn-with-icon">
+    <i class="fa-solid fa-angle-left"></i>
+    <a class="btn-text" href="#">Back</a>
+  </div>
+
+<%# Footer %>
+  <div class="navbar navbar-expand-sm navbar-light navbar-runware-child">
+    <div class="container-fluid">
+      <div>
+        <a href= "">
+          <div class="btn-with-icon">
+          <i class="fa-solid fa-angle-left"></i>
+          <a class="btn-text" href="#">Back</a>
+        </div>
+        </a>
+      </div>
+      <a href="" class="fa-solid fa-xmark"></a>
+    </div>
+  </div>

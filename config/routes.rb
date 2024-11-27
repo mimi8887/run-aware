@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-    resources :routes, only: %i[index new create show results]
-    
+    resources :routes, only: %i[index new create show]
+    get '/results', to: 'routes#results', as: :results
 end

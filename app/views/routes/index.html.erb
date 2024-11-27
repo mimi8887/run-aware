@@ -1,4 +1,9 @@
 <h1>New Route </h1>
+
+<div style="width: 100%; height: 600px;"
+  data-controller="map"
+  data-map-markers-value="<%= @routes %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 <%= link_to 'Nova Rota', new_route_path, class: 'btn btn-primary' %>
 
 <h2>Suggestions</h2>

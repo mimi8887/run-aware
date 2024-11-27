@@ -1,11 +1,6 @@
-<div id="map" style="width: 100%; height: 400px;"></div>
-
-<%= javascript_pack_tag 'map' %>
-
-
 <h1><%= @route.name %></h1>
 
-<p><strong>Descric:</strong> <%= @route.description %></p>
-<p><strong>Distância:</strong> <%= @route.distance %> km</p>
+<p><strong>Description:</strong> <%= @route.description %></p>
+<p><strong>Distance:</strong> <%= @route.distance %> km</p>
 
 <%= link_to 'Start',  route_runs_path(@route), data: { turbo_method: :post}, class: 'btn btn-primary' %>

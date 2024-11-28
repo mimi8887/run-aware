@@ -23,14 +23,30 @@ class RoutesController < ApplicationController
     @route = Route.find(params[:id])
     @start_address = @route.start_address
     @end_address = @route.end_address
-    @steps = @route.steps.select(:latitude, :longitude).order(:position).as_json
+    # @steps = @route.steps.select(:latitude, :longitude).order(:position).as_json
+    client = OpenAI::Client.new
+    chatgpt_response = client.chat(parameters: {
+      model: "gpt-4o-mini",
+      messages: [{ role: "user", content: "hello chat gpt!
+          I want to go for a run. I will start at #{@start_address}  and end at #{@end_address}
+          Can you please give me 5 points with longitude and latitude that form a route?
+          The first and last points should be my starting/ending address.
+          please give me back in this format:
+      [
+      { latitude: 52.48773804724966, longitude: 13.383683784580231 },
+      { latitude: 52.486351472937, longitude: 13.389951169490814 },
+        ...]
+          and please do not leave any of your comments in your response :)
+          thank you!" }]
+        })
+    @steps = eval(chatgpt_response["choices"][0]["message"]["content"].gsub("\n", "").gsub(" ", ""))
   end
 
   def create
       @route = Route.new(route_params)
       @route.user = current_user
       @route.save
-      redirect_to routes_path
+      redirect_to route_path(@route)
   end
 
   private

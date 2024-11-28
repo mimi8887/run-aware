@@ -2,16 +2,23 @@
 <div style="width: 100%; height: 600px;"
   data-controller="map"
   data-map-markers-value="<%= @routes %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-<%= link_to 'New Route', new_route_path, class: 'btn btn-primary' %>
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>
+<%= link_to 'New Route', new_route_path, class: 'btn btn-flat' %>
 
-<h2>Suggestions</h2>
+<h1>Suggestions</h1>
 <div class="cards_container">
   <% @routes.each do |route| %>
-      <div class="route-card">
-        <h3><%= link_to route.name, route_path(route) %></h3>
-        <p><%= route.description %></p>
-        <p><strong>Distance:</strong> <%= route.distance %> km</p>
+      <div class="card-run">
+        <%= image_tag "map.png",  width: 124, crop: :fill, class: "image-card" %>
+        <div class="card-run-infos">
+          <h2><%= link_to route.name, route_path(route) %></h2>
+          <div class="card-text-icon">
+            <i class="fa-solid fa-person-running"></i>
+            <p><strong>Distance:</strong> <%= route.distance %> km</p>
+          </div>
+          <p><%= route.description %></p>
+        </div>
       </div>
   <% end %>
 </div>

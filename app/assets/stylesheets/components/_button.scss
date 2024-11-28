@@ -1,0 +1,94 @@
+
+//button Icon
+
+.btn-text {
+  padding: 16px 8px;
+  transition: opacity 0.3s ease;
+  color: #553BD9;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.btn-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0px;
+  text-decoration: none;
+  color: #553BD9;
+  font-weight: bold;
+  transition: opacity 0.3s ease;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.btn-with-icon:hover {
+  color: #001DB8;
+}
+
+.btn-with-icon i {
+  font-size: 16px;
+}
+
+.btn-with-icon .btn-text {
+  text-decoration: none;
+}
+
+
+//Button primary
+.btn-primary {
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  background: #553BD9;
+  transition: background 0.3s ease;
+  box-shadow: 0 0 15px rgba(237,231,250,0.8);
+  border: 2px solid #553BD9;;
+  font-size: 16px;
+}
+
+.btn-primary:hover {
+  background: #001DB8;
+  color: #FFFFFF;
+}
+
+.btn-ghost {
+  color: #553BD9;
+  border: 2px solid #553BD9;
+  font-weight: 400;
+  padding: 12px 24px;
+  border-radius: 8px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  font-size: 16px;
+}
+
+.btn-ghost:hover {
+  color: #553BD9;
+  border: 2px solid #553BD9;
+  font-weight: 400;
+  padding: 12px 24px;
+  border-radius: 8px;
+  opacity: 0.6;
+  background-color: #EDE7FA;
+  transition: opacity 0.3s ease;
+  font-size: 16px;
+}
+
+.btn-play{
+  color: white;
+  padding: 7px 12px;
+  border-radius: 100px;
+  background: #553BD9;
+  transition: background 0.3s ease;
+  box-shadow: 0 0 15px rgba(237,231,250,0.8);
+  border: 2px solid #553BD9;;
+  font-size: 30px;
+  width: 60px;
+  height: 60px;
+}
+
+.btn-play:hover {
+  background: #001DB8;
+  color: #FFFFFF;
+}

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :runs, only: %i[create ] do
       get '/running', to: 'runs#running', as: :running
     end
+    resources :bookmarks, only: %i[create]
   end
 
   get '/results', to: 'routes#results', as: :results
@@ -22,4 +23,5 @@ Rails.application.routes.draw do
   resources :runs, only: %i[edit update show]
   get "style", to: "pages#style"
 
+  resources :bookmarks, only: %i[index]
 end

@@ -1,0 +1,33 @@
+.custom-form-input {
+  border: 1px solid #EDE7FA;
+  border-radius: 7px;
+  border-width: 2px;
+  color:#553BD9 ;
+  font-size: large;
+  margin-bottom: 15px;
+
+}
+
+.custom-form-input:focus {
+  background-color: red;
+}
+
+h4 {
+  color: black;
+  font-weight: bold;
+}
+
+.form-inputs {
+  background-color: white;
+  font-weight: bold;
+  font-size: inter;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.container{
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background-color: #dcdccb;
+  width: 100%
+}

@@ -5,5 +5,6 @@ class PagesController < ApplicationController
   end
 
   def style
+    @route = Route.new
   end
 end

@@ -23,6 +23,7 @@ class RoutesController < ApplicationController
     @route = Route.find(params[:id])
     @start_address = @route.start_address
     @end_address = @route.end_address
+    @steps = @route.steps.select(:latitude, :longitude).order(:position).as_json
   end
 
   def create

@@ -1,4 +1,6 @@
 puts 'destroy all records'
+Step.destroy_all
+Run.destroy_all
 Route.destroy_all
 User.destroy_all
 
@@ -12,8 +14,11 @@ kreuzberg_run = Route.create(name: "Kreuzberg Park Loop", distance: 5,
                              description: "A scenic loop through Kreuzberg's lush parks, ideal for a relaxing run on sunny afternoons.",
                              user: user1, start_address: "Großbeerenstraße 32", end_address: "Hermannstraße 233")
 
-Step.create(latitude: 52.494086642408476, longitude: 13.382394043903366, position: 0, route: kreuzberg_run)
-Step.create(latitude: 52.47767881020902, longitude: 13.426737267736522, position: 1, route: kreuzberg_run)
+Step.create(latitude: 52.48773804724966, longitude: 13.383683784580231, position: 0, route: kreuzberg_run)
+Step.create(latitude: 52.48293683457218, longitude: 13.394251634598700, position: 1, route: kreuzberg_run)
+Step.create(latitude: 52.47263456794273, longitude: 13.401832172346290, position: 1, route: kreuzberg_run)
+Step.create(latitude: 52.46783249127386, longitude: 13.386942103478290, position: 1, route: kreuzberg_run)
+Step.create(latitude: 52.48773804724966, longitude: 13.383683784580231, position: 1, route: kreuzberg_run)
 
 Route.create(name: "Prenzlauer Berg Pathway", distance: 10,
              description: "Explore the charming streets and tree-lined paths of Prenzlauer Berg,

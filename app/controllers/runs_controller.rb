@@ -31,7 +31,8 @@ class RunsController < ApplicationController
   end
 
   def edit
-
+    @run = Run.find(params[:id])
+    @route = @run.route
   end
 
   def update

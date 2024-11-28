@@ -4,7 +4,12 @@
   border-width: 2px;
   color:#553BD9 ;
   font-size: large;
+  margin-bottom: 15px;
 
+}
+
+.custom-form-input:focus {
+  background-color: red;
 }
 
 h4 {
@@ -13,15 +18,16 @@ h4 {
 }
 
 .form-inputs {
-  color:#553BD9 ;
+  background-color: white;
   font-weight: bold;
   font-size: inter;
-
+  border-radius: 10px;
+  padding: 20px;
 }
 
 .container{
   padding-top: 25px;
   padding-bottom: 25px;
-  // background-color: #F8f8f2;
+  background-color: #dcdccb;
   width: 100%
 }

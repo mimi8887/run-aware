@@ -1,0 +1,35 @@
+.card-run {
+  overflow: hidden;
+  height: 136px;
+  background: #EDE7FA;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 15px rgba(237,231,250,0.5);
+  width: 345px;
+}
+
+
+.card-run .card-run-infos {
+  padding: 16px;
+}
+
+.card-run .card-run-infos h2{
+  margin-top: 16px;
+}
+
+.card-text-icon {
+  display: flex;
+  gap: 4px;
+  margin-top: 16px;
+}
+
+.image-card {
+  height: 100%;
+}
+
+.card-run p {
+  font-size: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

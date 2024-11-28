@@ -30,7 +30,7 @@ class RoutesController < ApplicationController
       messages: [{ role: "user", content: "hello chat gpt!
           I want to go for a run. I will start at #{@start_address}  and end at #{@end_address}
           Can you please give me 5 points with longitude and latitude that form a route?
-          The first and last points should be my starting/ending address.
+          The first should be my starting address and my last point is the ending address.
           please give me back in this format:
       [
       { latitude: 52.48773804724966, longitude: 13.383683784580231 },
@@ -40,6 +40,32 @@ class RoutesController < ApplicationController
           thank you!" }]
         })
     @steps = eval(chatgpt_response["choices"][0]["message"]["content"].gsub("\n", "").gsub(" ", ""))
+
+    client_name = OpenAI::Client.new
+    chatgpt_response_name = client_name.chat(parameters: {
+      model: "gpt-4o-mini",
+      messages: [{ role: "user", content: "
+          I am going on a run.
+          Can you please generate a nice name made with 3 words for my run mentionning the name of the neighbourhood
+          (Mitte, Kreuzberg, Neukoelln etc) of #{@start_address} or #{@end_address}?
+          Give me only the name of the run, without any of your own answer like 'Here is a nice name for...'.
+          thank you!"
+          }]
+        })
+    @route.name = chatgpt_response_name["choices"][0]["message"]["content"]
+
+    client_description = OpenAI::Client.new
+    chatgpt_response_description = client_description.chat(parameters: {
+      model: "gpt-4o-mini",
+      messages: [{ role: "user", content: "
+          I am going on a run.
+          Can you please generate a very simple description for my run made with 2 sentences,
+          focusing on the neighbourhood (Mitte, Kreuzberg, Neukoelln etc) of #{@start_address} or #{@end_address}?
+          Give me only the description of the run, without any of your own answer like 'Here is a nice name for...'.
+          thank you!"
+          }]
+        })
+    @route.description = chatgpt_response_description["choices"][0]["message"]["content"]
   end
 
   def create

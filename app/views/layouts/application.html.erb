@@ -15,10 +15,11 @@
     <h1>Hello from homepage</h1>
     <% end %>
     <div class="page-container">
+      <div><%= render "shared/navbar-parent" %></div>
       <div class="container-page">
         <%= yield %>
       </div>
-      <div class="footer-container"><%= render "shared/footer" %></div>
+      <div><%= render "shared/footer" %></div>
     </div>
   </body>
 </html>

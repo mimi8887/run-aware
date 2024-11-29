@@ -10,34 +10,20 @@
   justify-content: space-around;
   align-items: center;
   text-align: center;
-  padding: 0px 96px;
+  padding: 0px 40px;
   background-color: #F5F5F5;
   border-top: 1px solid #e0e0e0;
   height: 80px;
   width: 100vw;
   transition: color 0.3s ease;
+  position: fixed;
+  bottom: 0;
 }
-
-// .footer-runware .footer-collapse {
-//   flex-grow: 0;
-// }
-
-// .footer-btn-with-icon {
-//   display: inline-flex;
-//   align-items: center;
-//   gap: 0px;
-//   text-decoration: none;
-//   color: #553BD9;
-//   font-weight: bold;
-//   transition: opacity 0.3s ease;
-//   border: none;
-//   background-color: transparent;
-//   cursor: pointer;
-// }
 
 .footer-btn-with-icon {
   text-decoration: none;
   font-size: 16px;
+  color: #BDBDBD;
 }
 
 .footer-btn-text {

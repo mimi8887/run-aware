@@ -1,4 +1,16 @@
 <h1>Saved routes</h1>
-<% @bookmarks.each do |bookmark| %>
-<%= bookmark.route.name %>
-<% end %>
+  <div class="my-4">
+  <% @bookmarks.each do |bookmark| %>
+      <div class="card-run my-3">
+        <%= image_tag "map.png",  width: 124, crop: :fill, class: "image-card" %>
+        <div class="card-run-infos">
+          <h2><%= link_to bookmark.route.name, route_path(bookmark.route) %></h2>
+          <div class="card-text-icon ">
+            <i class="fa-solid fa-person-running"></i>
+            <p><strong>Distance:</strong> <%= bookmark.route.distance %> km</p>
+          </div>
+          <p><%= bookmark.route.description %></p>
+        </div>
+      </div>
+  <% end %>
+</div>

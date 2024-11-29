@@ -5,6 +5,9 @@
   background: #F5F5F5;
   height: 80px;
   padding: 0px 24px;
+  position: fixed;
+  width: 100vw;
+  top: 0;
 }
 
 .navbar-runware-parent .navbar-collapse {
@@ -17,6 +20,8 @@
   background: #F5F5F5;
   height: 80px;
   padding: 0px 8px;
+  position: fixed;
+  width: 100vw;
 }
 
 .navbar-runware-parent .runware-child {

@@ -6,13 +6,14 @@
   font-size: large;
   margin-bottom: 15px;
 
+
 }
 
 .custom-form-input:focus {
-  background-color: red;
+  background-color: #EDE7FA
 }
 
-h4 {
+h2 {
   color: black;
   font-weight: bold;
 }
@@ -22,12 +23,19 @@ h4 {
   font-weight: bold;
   font-size: inter;
   border-radius: 10px;
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  color:#553bd9 ;
+  font-weight: bold;
+  box-shadow: 0px 0px 1px 1px #e1dede;
+
 }
 
 .container{
   padding-top: 25px;
   padding-bottom: 25px;
-  background-color: #dcdccb;
+  background-color: #f1f1e6;
   width: 100%
 }

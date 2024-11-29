@@ -4,14 +4,13 @@
 <div class=<div class="col-lg-6 my-5"></div>
 
 <div class="form-inputs">
-<h1>Workout of the day</h1>
+<h2>Workout of the day</h2>
 <%= simple_form_for(@route) do |f| %>
   <%= f.input :start_address, input_html: { class: "custom-form-input" } %>
   <%= f.input :end_address, input_html: { class: "custom-form-input" } %>
-  <%= f.submit %>
+  <%= f.submit class: "btn btn-flat" %>
 <% end %>
 </div>
 </div>
 </div>
 </div>
-

@@ -21,51 +21,55 @@ class RoutesController < ApplicationController
 
   def show
     @route = Route.find(params[:id])
-    @start_address = @route.start_address
-    @end_address = @route.end_address
-    # @steps = @route.steps.select(:latitude, :longitude).order(:position).as_json
-    client = OpenAI::Client.new
-    chatgpt_response = client.chat(parameters: {
-      model: "gpt-4o-mini",
-      messages: [{ role: "user", content: "hello chat gpt!
+    if @route == Route.last
+      @start_address = @route.start_address
+      @end_address = @route.end_address
+      client = OpenAI::Client.new
+      chatgpt_response = client.chat(parameters: {
+        model: "gpt-4o-mini",
+        messages: [{ role: "user", content: "hello chat gpt!
           I want to go for a run. I will start at #{@start_address}  and end at #{@end_address}
           Can you please give me 5 points with longitude and latitude that form a route?
           The first should be my starting address and my last point is the ending address.
           please give me back in this format:
-      [
-      { latitude: 52.48773804724966, longitude: 13.383683784580231 },
-      { latitude: 52.486351472937, longitude: 13.389951169490814 },
-        ...]
-          and please do not leave any of your comments in your response :)
-          thank you!" }]
-        })
-    @steps = eval(chatgpt_response["choices"][0]["message"]["content"].gsub("\n", "").gsub(" ", ""))
+            [
+              { latitude: LATITUDE_VALUE, longitude: LONGITUDE_VALUE },
+              { latitude: LATITUDE_VALUE, longitude: LONGITUDE_VALUE },
+              ...]
+            All the points should be equally spread from each other.
+            and please do not leave any of your comments in your response :)
+            thank you!" }]
+          })
+      @steps = eval(chatgpt_response["choices"][0]["message"]["content"].gsub("\n", "").gsub(" ", ""))
 
-    client_name = OpenAI::Client.new
-    chatgpt_response_name = client_name.chat(parameters: {
-      model: "gpt-4o-mini",
-      messages: [{ role: "user", content: "
-          I am going on a run.
-          Can you please generate a nice name made with 3 words for my run mentionning the name of the neighbourhood
-          (Mitte, Kreuzberg, Neukoelln etc) of #{@start_address} or #{@end_address}?
-          Give me only the name of the run, without any of your own answer like 'Here is a nice name for...'.
-          thank you!"
-          }]
-        })
-    @route.name = chatgpt_response_name["choices"][0]["message"]["content"]
+      client_name = OpenAI::Client.new
+      chatgpt_response_name = client_name.chat(parameters: {
+        model: "gpt-4o-mini",
+        messages: [{ role: "user", content: "
+            I am going on a run.
+            Can you please generate a nice name made with 3 words for my run mentionning the name of the neighbourhood
+            (Mitte, Kreuzberg, Neukoelln etc) but not the name of the street of #{@start_address} or #{@end_address}?
+            Give me only the name of the run, without any of your own answer like 'Here is a nice name for...'.
+            thank you!"
+            }]
+          })
+      @route.name = chatgpt_response_name["choices"][0]["message"]["content"]
 
-    client_description = OpenAI::Client.new
-    chatgpt_response_description = client_description.chat(parameters: {
-      model: "gpt-4o-mini",
-      messages: [{ role: "user", content: "
-          I am going on a run.
-          Can you please generate a very simple description for my run made with 2 sentences,
-          focusing on the neighbourhood (Mitte, Kreuzberg, Neukoelln etc) of #{@start_address} or #{@end_address}?
-          Give me only the description of the run, without any of your own answer like 'Here is a nice name for...'.
-          thank you!"
-          }]
-        })
-    @route.description = chatgpt_response_description["choices"][0]["message"]["content"]
+      client_description = OpenAI::Client.new
+      chatgpt_response_description = client_description.chat(parameters: {
+        model: "gpt-4o-mini",
+        messages: [{ role: "user", content: "
+            I am going on a run.
+            Can you please generate a very simple description for my run made with 2 sentences,
+            focusing on the neighbourhood (Mitte, Kreuzberg, Neukoelln etc) of #{@start_address} or #{@end_address}?
+            Give me only the description of the run, without any of your own answer like 'Here is a nice name for...'.
+            thank you!"
+            }]
+          })
+      @route.description = chatgpt_response_description["choices"][0]["message"]["content"]
+  else
+    @steps = @route.steps.select(:latitude, :longitude).order(:position).as_json
+  end
   end
 
   def create
@@ -82,7 +86,7 @@ class RoutesController < ApplicationController
   end
 
   def results
-    results@routes= Route.order("RESULT()").first
+    @routes = Route.order("RESULT()").first
   end
 
 end

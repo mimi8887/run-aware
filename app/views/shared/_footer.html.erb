@@ -1,17 +1,15 @@
 <%# Footer %>
   <div class="footer">
-      <div class="footer-btn-with-icon">
+      <div class="footer-btn-with-icon <%= 'footer-active' if controller_name == 'routes' && action_name == 'index' %>">
         <%= link_to  routes_path do %>
-        <%= 'active' if controller_name == 'routes' && action_name == 'routes' %>
         <i class="fa-solid fa-house"></i>
         <div>Home</div>
         <% end %>
       </div>
 
-      <div class="footer-btn-with-icon">
+      <div class="footer-btn-with-icon <%= 'footer-active' if controller_name == 'bookmarks' && action_name == 'index' %>">
         <%= link_to bookmarks_path do %>
-        <%= 'active' if controller_name == 'booksmarks' && action_name == 'index' %>
-        <i class="fa-solid fa-bookmark"></i>
+        <i class="fa-solid fa-bookmark"> </i>
         <div>Bookmarks</div>
         <% end %>
       </div>

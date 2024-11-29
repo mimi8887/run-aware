@@ -15,7 +15,7 @@
 
 a {
   text-decoration: none;
-  color: #553BD9;
+  color: #BDBDBD;
 }
 
 h1 {
@@ -30,6 +30,11 @@ h2 {
   font-weight: bold;
 }
 
+h2 a {
+  color: #553BD9;
+  font-weight: bold;
+}
+
 .container-page {
   margin: 104px 24px;
   background: #ffffff;
@@ -37,6 +42,7 @@ h2 {
 
 p {
   font-size: 16px;
+  color: #333333;
 }
 
 .page-container {

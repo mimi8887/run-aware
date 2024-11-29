@@ -19,24 +19,25 @@ class RunsController < ApplicationController
     @route = @run.route
   end
 
-  def show
-    @run = Run.find(params[:id])
-  end
+  # def show
+  #   @run = Run.find(params[:id])
+  #   @step = @run.route.steps
+  # end
 
   def end_run
     @run = Run.find(params[:id])
     @run.ending_time = Time.now
     @run.save
-    redirect_to edit_run_path(@run)
+    # redirect_to edit_run_path(@run)
+    redirect_to run_path(@run)
   end
 
-  def edit
+  def show
     @run = Run.find(params[:id])
     @route = @run.route
+    @bookmark = Bookmark.new
   end
 
   def update
-
   end
-
 end

@@ -4,9 +4,9 @@
   data-map-markers-value="<%= @routes %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
-<%= link_to 'New Route', new_route_path, class: 'btn btn-flat' %>
+<%= link_to 'New Route', new_route_path, class: 'btn btn-flat my-4' %>
 
-<h1 class="my-4">Suggestions</h1>
+<h1 class="my-3">Suggestions</h1>
 <div class="cards_container">
   <% @routes.each do |route| %>
       <div class="card-run">

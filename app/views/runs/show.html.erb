@@ -1,8 +1,13 @@
-<p>back</p>
-<div class="map">
 
-</div>
-<h1><%= @run.route.name %></h1>
-<p><%= @run.route.description %></p>
-
+<h1>Your route has finished!</h1>
+<h2>Summary</h2>
+<p>Distance : </p>
+<p>Total time : <%= Time.at(@run.ending_time - @run.starting_time).utc.strftime("%H:%M:%S") %></p>
+<p>Pace : km</p>
+<p>Upload a picture :</p>
+<%= simple_form_for [ @run, @bookmark ] do |f| %>
+  <%= f.input :photo, as: :file, input_html: { class: "custom-form-input" } %>
+  <%= f.submit "Favorite the Route" %>
+<% end %>
+ <%# <%= link_to "Favorite the Route", bookmarks_path  %>
 

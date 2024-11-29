@@ -18,6 +18,7 @@
   transition: color 0.3s ease;
   position: fixed;
   bottom: 0;
+  z-index: 99;
 }
 
 .footer-btn-with-icon {
@@ -42,6 +43,6 @@
   color: #001DB8;
 }
 
-.footer-active {
+.footer-active a {
   color: #001DB8;
 }

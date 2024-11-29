@@ -1,3 +1,11 @@
-<h1>Run edit page </h1>
+<h1>Your route has finished!</h1>
 <h2>Summary</h2>
- <%= link_to "Favorite the Route", bookmarks_path  %>
+<p>Distance : </p>
+<p>Total time : <%= Time.at(@run.ending_time - @run.starting_time).utc.strftime("%H:%M:%S") %></p>
+<p>Pace : km</p>
+<p>Upload a picture :</p>
+<%= simple_form_for @bookmark do |f| %>
+  <%= f.input :photo, as: :file, input_html: { class: "custom-form-input" } %>
+  <%= f.submit "Favorite the Route" %>
+<% end %>
+ <%# <%= link_to "Favorite the Route", bookmarks_path  %>

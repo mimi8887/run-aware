@@ -1,6 +1,6 @@
 class BookmarksController < ApplicationController
   def index
-    @bookmarks = Bookmark.all
+
     @markers = [
       { lat: 52.48773804724966, lng: 13.383683784580231 },
       { lat: 52.486351472937, lng: 13.389951169490814 },
@@ -13,22 +13,29 @@ class BookmarksController < ApplicationController
       { lat: 52.48280001108698, lng: 13.379095245741312 },
       { lat: 52.48773804724966, lng: 13.383683784580231 }
       ]
+
+    @bookmarks = current_user.bookmarks
+
   end
 
   def create
+    @route = Run.find(params[:run_id]).route
     @bookmark = Bookmark.new(bookmark_params)
     @bookmark.user = current_user
-    @bookmark.save
-
   if @bookmark.save
     redirect_to bookmarks_path
     render :new
+    @bookmark.route = @route
+    if @bookmark.save
+      redirect_to bookmarks_path, notice: 'Bookmark criado com sucesso.'
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
-end
 
-private
+  private
 
-def bookmark_params
-  params.require(:bookmark).permit(:title, :url)
-end
+  def bookmark_params
+    params.fetch(:bookmark, {}).permit(:photo)
+  end
 end

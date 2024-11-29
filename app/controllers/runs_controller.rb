@@ -21,6 +21,7 @@ class RunsController < ApplicationController
 
   def show
     @run = Run.find(params[:id])
+    @step = @run.route.steps
   end
 
   def end_run
@@ -33,10 +34,9 @@ class RunsController < ApplicationController
   def edit
     @run = Run.find(params[:id])
     @route = @run.route
+    @step = @route.steps
   end
 
   def update
-
   end
-
 end

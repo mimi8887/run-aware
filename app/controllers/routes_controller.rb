@@ -21,7 +21,7 @@ class RoutesController < ApplicationController
 
   def show
     @route = Route.find(params[:id])
-    if @route.steps.any?
+    if @route == Route.last
       @start_address = @route.start_address
       @end_address = @route.end_address
       client = OpenAI::Client.new
@@ -41,7 +41,6 @@ class RoutesController < ApplicationController
             thank you!" }]
           })
       @steps = eval(chatgpt_response["choices"][0]["message"]["content"].gsub("\n", "").gsub(" ", ""))
-    # JSON.parse(chatgpt_response["choices"][0]["message"]["content"])
 
       client_name = OpenAI::Client.new
       chatgpt_response_name = client_name.chat(parameters: {

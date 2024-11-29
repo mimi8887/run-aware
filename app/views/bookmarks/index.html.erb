@@ -1,1 +1,4 @@
 <h1>Saved routes</h1>
+<% @bookmarks.each do |bookmark| %>
+<%= bookmark.route.name %>
+<% end %>

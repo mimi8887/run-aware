@@ -8,17 +8,16 @@ class BookmarksController < ApplicationController
     @bookmark = Bookmark.new(bookmark_params)
     @bookmark.user = current_user
     @bookmark.route = @route
-    @bookmark.save
     if @bookmark.save
-      redirect_to run_bookmarks_path, notice: 'Bookmark criado com sucesso.'
+      redirect_to bookmarks_path, notice: 'Bookmark criado com sucesso.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
   private
 
   def bookmark_params
-    params.require(:bookmark).permit(:photo)
+    params.fetch(:bookmark, {}).permit(:photo)
   end
 end

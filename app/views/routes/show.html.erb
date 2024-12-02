@@ -5,10 +5,26 @@
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 <%= link_to 'New Route', new_route_path, class: 'btn btn-flat my-4' %>
 <%= link_to "refresh", route_path(@route) %>
-
 <h1 class="my-2"><%= @route.name %></h1>
 
-<p><strong>Description:</strong> <%= @route.description %></p>
-<p><strong>Distance:</strong> <%= @route.distance %> km</p>
+<div class="weather">
+<% if @weather == "Clear" %>
+<span><i class="fa-solid fa-sun"></i></span>
+<% elsif  @weather == "Clouds" %>
+<span><i class="fa-solid fa-cloud"></i></span>
+<% elsif @weather =="Rain" %>
+<span><i class="fa-solid fa-cloud-rain"></i></span>
+<% elsif  @weather == "Thunderstorm" %>
+<span><i class="fa-solid fa-cloud-bolt"></i></span>
+<% elsif @weather == "Snow" %>
+<span><i class="fa-solid fa-snowflake"></i></span>
+<% else %>
+<span><i class="fa-solid fa-cloud-sun"></i></span>
+<% end %><span><%= @degree.round(2) %>°C</span>
+
+<span><i class="fa-solid fa-person-running"></i><%= @route.distance %> km</span>
+</div>
+
+<p><strong></strong> <%= @route.description %></p>
 
 <%= link_to 'Start',  route_runs_path(@route), data: { turbo_method: :post}, class: 'btn btn-flat' %>

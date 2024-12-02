@@ -1,4 +1,5 @@
 puts 'destroy all records'
+Bookmark.destroy_all
 Step.destroy_all
 Run.destroy_all
 Route.destroy_all

@@ -10,26 +10,3 @@
 <p><strong>Description:</strong> <%= @run.route.description %></p>
 <p><strong>Distance:</strong> <%= @run.route.distance %> km</p>
 
-<%= link_to 'Start',  route_runs_path(@route), data: { turbo_method: :post}, class: 'btn btn-flat' %>
-
-<div class="container">
-<div class="row justify-content-center">
-<div class="col-lg-4 my-6">
-
-<div class="form-inputs-new">
-  <h1>Your route has finished!</h1>
-<h2>Summary</h2>
-<p>Distance : </p>
-<p>Total time : <%= Time.at(@run.ending_time - @run.starting_time).utc.strftime("%H:%M:%S") %></p>
-<p>Pace : km</p>
-<p>Upload a picture :</p>
-<%= simple_form_for [ @run, @bookmark ] do |f| %>
-  <%= f.input :photo, as: :file, input_html: { class: "custom-form-input-new" } %>
-  <%= f.button :submit, "Favorite the Route", class: "btn-flat" %>
-<% end %>
-</div>
-</div>
-</div>
-</div>
- <%# <%= link_to "Favorite the Route", bookmarks_path  %>
-

@@ -15,6 +15,7 @@ class RoutesController < ApplicationController
       { lat: 52.48280001108698, lng: 13.379095245741312 },
       { lat: 52.48773804724966, lng: 13.383683784580231 }
       ]
+
   end
 
   def new
@@ -80,8 +81,7 @@ class RoutesController < ApplicationController
     @temperature = @data['main']['temp']
     @degree = @temperature.to_f - 273.15
     @weather = @data['weather'][0]['main']
-
-   end
+  end
 
   def create
       @route = Route.new(route_params)

@@ -69,8 +69,9 @@ class RoutesController < ApplicationController
             }]
           })
       @route.description = chatgpt_response_description["choices"][0]["message"]["content"]
-  else
+    else
     @steps = @route.steps.select(:latitude, :longitude).order(:position).as_json
+
   end
 
     @url = "https://api.openweathermap.org/data/2.5/weather?lat=52.52&lon=13.40&appid=93fad4ed2d411554730316c443c0e0df"
@@ -79,7 +80,8 @@ class RoutesController < ApplicationController
     @temperature = @data['main']['temp']
     @degree = @temperature.to_f - 273.15
     @weather = @data['weather'][0]['main']
-  end
+
+   end
 
   def create
       @route = Route.new(route_params)

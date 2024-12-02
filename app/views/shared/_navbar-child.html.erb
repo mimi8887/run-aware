@@ -3,10 +3,18 @@
     <div>
       <a href= "">
         <div class="btn-with-icon">
-        <i class="fa-solid fa-angle-left"></i>
-        <a class="btn-text" href="#">Back</a>
-      </div>
+          <i class="fa-solid fa-angle-left"></i>
+          <%= link_to 'Back', request.referer || root_path, class: "btn btn-with-icon" %>
+        </div>
       </a>
     </div>
-    <a href="" class="fa-solid fa-xmark"></a>
+    <% if (controller_name == "runs") %>
+      <%= link_to bookmarks_path do %>
+        <i class="fa-solid fa-xmark"></i>
+      <% end %>
+    <% else %>
+      <%= link_to root_path do %>
+        <i class="fa-solid fa-xmark"></i>
+      <% end %>
+    <% end %>
   </div>

@@ -6,10 +6,10 @@
         <h2>Workout of the day</h2>
         <%= simple_form_for(@route) do |f| %>
         <%= f.input :start_address,
-          input_html: {data: {address_autocomplete_target: "start_address"}, class: "d-none"},
+          input_html: {data: {address_autocomplete_target: "address"}, class: "d-none"},
           wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV['MAPBOX_API_KEY']}} %>
         <%= f.input :end_address,
-          input_html: {data: {address_autocomplete_target: "end_address"}, class: "d-none"},
+          input_html: {data: {address_autocomplete_target: "address"}, class: "d-none"},
           wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV['MAPBOX_API_KEY']}} %>
         <%= f.input :distance, collection: ['5 - 10km', '10 - 15km', '15 - 20km', '20 - 25 km'],
      prompt: 'Select distance', input_html: { class: 'form-control' }, input_html: { class: "custom-form-input" } %>

@@ -1,6 +1,8 @@
 require "open-uri"
 
 class RoutesController < ApplicationController
+  require 'open-uri'
+
   def index
     @routes = Route.all
     @markers = [
@@ -25,26 +27,47 @@ class RoutesController < ApplicationController
   def show
     @route = Route.find(params[:id])
     if @route == Route.last
-      @start_address = @route.start_address
-      @end_address = @route.end_address
+      @start_address = I18n.transliterate(@route.start_address)
+      @end_address = I18n.transliterate(@route.end_address)
+      json_start = URI.parse("https://nominatim.openstreetmap.org/search.php?q=#{@start_address}&format=jsonv2").read
+      JSON.parse(json_start)
+      @start_lat = JSON.parse(json_start)[0]["lat"]
+      @start_long = JSON.parse(json_start)[0]["lng"]
+
+      json_end = URI.parse("https://nominatim.openstreetmap.org/search.php?q=#{@end_address}&format=jsonv2").read
+      JSON.parse(json_end)
+      @end_lat = JSON.parse(json_end)[0]["lat"]
+      @end_long = JSON.parse(json_end)[0]["lng"]
+      @distance = @route.distance
+
       client = OpenAI::Client.new
       chatgpt_response = client.chat(parameters: {
         model: "gpt-4o-mini",
-        messages: [{ role: "user", content: "hello chat gpt!
-          I want to go for a run. I will start at #{@start_address}  and end at #{@end_address}
-          Can you please give me 5 points with longitude and latitude that form a route?
-          The first should be my starting address and my last point is the ending address.
-          please give me back in this format:
-            [
-              { latitude: LATITUDE_VALUE, longitude: LONGITUDE_VALUE },
-              { latitude: LATITUDE_VALUE, longitude: LONGITUDE_VALUE },
-              ...]
-            All the points should be equally spread from each other.
-            and please do not leave any of your comments in your response :)
-            thank you!" }]
-          })
-      @steps = eval(chatgpt_response["choices"][0]["message"]["content"].gsub("\n", "").gsub(" ", ""))
+        messages: [{ role: "user", content:
+        "I am in Berlin Germany and I want to go for a run. I will start at #{@start_lat}, #{@start_long}
+        and end at #{@end_lat}, #{@end_long}.
+        The run should be approximately #{@distance}. Can you give me 5 waypoints (including the start and end points)
+        with latitude and longitude that form a logical, connected route?
+        Each point should be roughly equally spaced and follow real-world paths or streets.
+        Please ensure the start and end points match the addresses provided.
 
+        The response format should strictly be valid JSON text like this:
+
+         [
+            { \"latitude\": LATITUDE_VALUE, \"longitude\": LONGITUDE_VALUE },
+            { \"latitude\": LATITUDE_VALUE, \"longitude\": LONGITUDE_VALUE },
+            ...
+          ]
+
+        Do not add any comments, extra text or ``` in your response. Thank you!" }]
+        })
+      # @steps = eval(chatgpt_response["choices"][0]["message"]["content"].gsub("\n", "").gsub(" ", ""))
+
+      @json = chatgpt_response["choices"][0]["message"]["content"]
+      @steps = JSON.parse(@json)
+      p chatgpt_response
+      p @json
+      p @steps
       client_name = OpenAI::Client.new
       chatgpt_response_name = client_name.chat(parameters: {
         model: "gpt-4o-mini",
@@ -57,7 +80,6 @@ class RoutesController < ApplicationController
             }]
           })
       @route.name = chatgpt_response_name["choices"][0]["message"]["content"]
-
       client_description = OpenAI::Client.new
       chatgpt_response_description = client_description.chat(parameters: {
         model: "gpt-4o-mini",
@@ -74,6 +96,8 @@ class RoutesController < ApplicationController
     @steps = @route.steps.select(:latitude, :longitude).order(:position).as_json
 
   end
+  @route.save
+  
 
     @url = "https://api.openweathermap.org/data/2.5/weather?lat=52.52&lon=13.40&appid=93fad4ed2d411554730316c443c0e0df"
     @json = URI.parse(@url).read
@@ -88,6 +112,7 @@ class RoutesController < ApplicationController
       @route.user = current_user
       @route.save
       redirect_to route_path(@route)
+
   end
 
   private

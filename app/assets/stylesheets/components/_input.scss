@@ -3,8 +3,9 @@
   border-radius: 7px;
   border-width: 2px;
   color:#553BD9 ;
-  font-size: large;
+  font-size: 1rem;
   margin-bottom: 15px;
+
 
 
 }
@@ -38,4 +39,24 @@ h2 {
   padding-bottom: 25px;
   background-color: #F5F5F5;;
   width: 100%
+}
+
+.suggestions-container {
+  position: absolute;
+  top: 100%; /* Ensure it appears below the input */
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+}
+
+.btn-wide {
+  width: 100%
+}
+
+#submit-button {
+  margin: 0px 0px;
+  padding: 8px;
+  margin-top: 15px;
+
 }

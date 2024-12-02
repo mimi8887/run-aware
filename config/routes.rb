@@ -10,9 +10,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-
   resources :routes, only: %i[index new create show results] do
     resources :runs, only: %i[create] do
+
+      get '/running', to: 'runs#running', as: :running
 
     end
   end

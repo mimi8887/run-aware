@@ -79,7 +79,6 @@ class RoutesController < ApplicationController
             }]
           })
       @route.name = chatgpt_response_name["choices"][0]["message"]["content"]
-
       client_description = OpenAI::Client.new
       chatgpt_response_description = client_description.chat(parameters: {
         model: "gpt-4o-mini",
@@ -96,6 +95,8 @@ class RoutesController < ApplicationController
     @steps = @route.steps.select(:latitude, :longitude).order(:position).as_json
 
   end
+  @route.save
+  
 
     @url = "https://api.openweathermap.org/data/2.5/weather?lat=52.52&lon=13.40&appid=93fad4ed2d411554730316c443c0e0df"
     @json = URI.parse(@url).read

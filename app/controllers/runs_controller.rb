@@ -20,7 +20,7 @@ class RunsController < ApplicationController
   end
 
   def show
-    @run = Run.find(params[:run_id])
+    @run = Run.find(params[:id])
   end
 
   def end_run

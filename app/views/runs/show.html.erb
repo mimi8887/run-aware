@@ -1,25 +1,12 @@
+<div style="width: 100%; height: 600px;"
+  data-controller="map"
+  data-map-markers-value="<%= @steps.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+<%= link_to 'New Route', new_route_path, class: 'btn btn-flat my-4' %>
 
-<div class="container">
-<div class="row">
-<div class="col-lg-4 my-6">
+<h1 class="my-2"><%= @run.route.name %></h1>
 
-<div class="form-inputs-new">
+<p><strong>Description:</strong> <%= @run.route.description %></p>
+<p><strong>Distance:</strong> <%= @run.route.distance %> km</p>
 
-
-
-<h1>Your route has finished!</h1>
-<h2>Summary</h2>
-<p>Distance : </p>
-<p>Total time : <%= Time.at(@run.ending_time - @run.starting_time).utc.strftime("%H:%M:%S") %></p>
-<p>Pace : km</p>
-<p>Upload a picture :</p>
-<%= simple_form_for [ @run, @bookmark ] do |f| %>
-  <%= f.input :photo, as: :file, input_html: { class: "custom-form-input-new" } %>
-  <%= f.button :submit, "Favorite the Route", class: "btn-flat" %>
-<% end %>
-</div>
-</div>
-</div>
-</div>
- <%# <%= link_to "Favorite the Route", bookmarks_path  %>
-
+<%= link_to 'Start',  route_runs_path(@route), data: { turbo_method: :post}, class: 'btn btn-flat' %>

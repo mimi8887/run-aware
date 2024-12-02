@@ -67,9 +67,9 @@ class RoutesController < ApplicationController
             }]
           })
       @route.description = chatgpt_response_description["choices"][0]["message"]["content"]
-  else
+    else
     @steps = @route.steps.select(:latitude, :longitude).order(:position).as_json
-  end
+   end
   end
 
   def create

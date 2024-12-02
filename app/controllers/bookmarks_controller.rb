@@ -15,7 +15,6 @@ class BookmarksController < ApplicationController
       ]
 
     @bookmarks = current_user.bookmarks
-
   end
 
   def create

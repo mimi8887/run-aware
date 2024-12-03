@@ -51,11 +51,20 @@ class RoutesController < ApplicationController
         })
       # @steps = eval(chatgpt_response["choices"][0]["message"]["content"].gsub("\n", "").gsub(" ", ""))
 
+
       @json = chatgpt_response["choices"][0]["message"]["content"]
       @steps = JSON.parse(@json)
       p chatgpt_response
       p @json
       p @steps
+      @steps.each_with_index do |step, index|
+       if index == 0
+        step[:marker_html] = render_to_string(partial: "shared/marker")
+       else
+        step[:marker_html] = render_to_string(partial: "shared/markerarrive")
+      end
+    end
+
       client_name = OpenAI::Client.new
       chatgpt_response_name = client_name.chat(parameters: {
         model: "gpt-4o-mini",
@@ -85,6 +94,7 @@ class RoutesController < ApplicationController
 
   end
   @route.save
+
     @url = "https://api.openweathermap.org/data/2.5/weather?lat=52.52&lon=13.40&appid=93fad4ed2d411554730316c443c0e0df"
     @json = URI.parse(@url).read
     @data = JSON.parse(@json)

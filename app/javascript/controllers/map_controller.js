@@ -22,23 +22,28 @@ export default class extends Controller {
     })
 
     const steps = this.markersValue;
+    const customMarker_1 = document.createElement("div")
+      customMarker_1.innerHTML = steps[0].marker_html
+      const customMarker_2 = document.createElement("div")
+      customMarker_2.innerHTML = steps[steps.length - 1].marker_html
+      //customMarker.innerHTML = step.marker_html
     // placing first marker on the map
-    new mapboxgl.Marker()
+    new mapboxgl.Marker(customMarker_1)
     .setLngLat([ steps[0].longitude, steps[0].latitude ])
     .addTo(this.map);
     // placing last marker on the map
-    new mapboxgl.Marker()
+    new mapboxgl.Marker(customMarker_2)
     .setLngLat([ steps[steps.length - 1].longitude, steps[steps.length - 1].latitude ])
     .addTo(this.map);
 
     steps.forEach((step, index) => {
       // generating markers for the route but not making it show up on the map
-
       new mapboxgl.Marker()
       .setLngLat([ step.longitude, step.latitude ])
       // preventing the code to break
 
       if (index + 1 < steps.length) {
+
       const bounds = new mapboxgl.LngLatBounds()
       this.markersValue.forEach(step => bounds.extend([ step.longitude, step.latitude ]))
       this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 })
@@ -64,23 +69,22 @@ export default class extends Controller {
                     },
                   }
                 },
-                layout: {
-                  'line-join': 'round',
-                  'line-cap': 'round'
-                },
-                paint: {
-                  'line-color': '#4e68f8',
-                  'line-width': 4
-                }
-              })
-              this.map.fitBounds(bounds, {
-                padding: {top: 50, bottom: 50, left: 50, right: 50}, // Optional padding around the route
-                maxZoom: 15 // Optional maximum zoom level
-            });
-           })
+              layout: {
+                'line-join': 'round',
+                'line-cap': 'round'
+              },
+              paint: {
+                'line-color': '#553BD9',
+                'line-width': 5
+              }
+            })
+            this.map.fitBounds(bounds, {
+              padding: {top: 50, bottom: 50, left: 50, right: 50}, // Optional padding around the route
+              maxZoom: 15 // Optional maximum zoom level
+          });
+        })
       }
-
-        });
+   });
     // });
 
 

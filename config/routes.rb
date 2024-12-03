@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   patch '/end_run/:id', to: 'runs#end_run', as: :end_run
   resources :runs, only: %i[edit update show] do
     get '/running', to: 'runs#running', as: :running
-    resources :bookmarks, only: %i[create]
+    resources :bookmarks, only: %i[create update]
   end
   get "style", to: "pages#style"
   get "runs/:id/summary", to: "runs#summary", as: :summary

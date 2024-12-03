@@ -35,7 +35,7 @@ class RunsController < ApplicationController
   def summary
     @run = Run.find(params[:id])
     @route = @run.route
-    @bookmark = Bookmark.new
+    @bookmark = Bookmark.find_by(user: current_user, route: @run.route) || Bookmark.new
   end
 
   def update

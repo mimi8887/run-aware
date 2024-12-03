@@ -14,7 +14,8 @@
 <p>Pace : km</p>
 <p>Upload a picture :</p>
 <%= simple_form_for [ @run, @bookmark ] do |f| %>
-  <%= f.input :photo, as: :file, input_html: { class: "custom-form-input-new" } %>
+  <%= f.input :comment, placeholder: "Enter your comment here", as: :text, input_html: { rows: "10" }, input_html: { class: "custom-form-input" } %>
+  <%= f.input :photos, as: :file, input_html: { class: "custom-form-input-new", multiple: true } %>
   <%= f.button :submit, "Favorite the Route", class: "btn-flat" %>
 <% end %>
 </div>
@@ -22,4 +23,3 @@
 </div>
 </div>
  <%# <%= link_to "Favorite the Route", bookmarks_path  %>
-

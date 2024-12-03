@@ -24,6 +24,7 @@ class BookmarksController < ApplicationController
       @bookmark = Bookmark.new(bookmark_params)
       @bookmark.user = current_user
       @bookmark.route = @route
+      raise
        if @bookmark.save
         redirect_to bookmarks_path, notice: 'Bookmark created successfuly.'
       else
@@ -35,6 +36,16 @@ class BookmarksController < ApplicationController
         redirect_to bookmarks_path, notice: 'Photo attached to existing bookmark.'
       end
     end
+  end
+
+  def update
+    @route = Run.find(params[:run_id]).route
+    @bookmark = Bookmark.find(params[:id])
+    @bookmark.update!(bookmark_params)
+    if params[:bookmark][:photos].present?
+      @bookmark.photos.attach(params[:bookmark][:photos])
+    end
+    redirect_to bookmarks_path
   end
 
   private

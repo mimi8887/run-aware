@@ -27,28 +27,23 @@
     </div>
   </div>
 
-<h4 id="comment-heading">Comments</h4>
-<form action="/submit-comment" method="post">
-  <label for="comment"></label><br>
-  <%= f.input :comment, placeholder: "Enter your comment here", as: :text, input_html: { rows: "10" }, input_html: { class: "custom-form-input" } %>
-</form>
+  <%= simple_form_for [ @run, @bookmark ], html: { multipart: true } do |f| %>
+    <h4 id="comment-heading">Comments</h4>
+    <%= f.input :comment,  placeholder: "How do you feel", as: :text, input_html: { rows: "10" }, input_html: { class: "custom-form-input" } %>
 
-<h4>Upload image</h4>
-<%= simple_form_for [ @run, @bookmark ], html: { multipart: true } do |f| %>
-  <div class="upload-container">
-    <label class="upload-box" for="upload-photo">
-      <%= f.input :photos, as: :file, input_html: { class: "custom-form-input-new", multiple: true } %>
+    <h4>Upload image</h4>
+    <div class="upload-container">
+      <label class="upload-box" for="upload-photo">
+      <%= f.input :photos, label: false, as: :file, input_html: { id: "upload-photo", class: "hidden-file-input", accept: "image/*" } %>
       <img id="image-preview" alt="Preview">
       <span class="icon"><i class="fa-solid fa-camera-retro"></i></span>
-    </label>
-  </div>
-
-  <%= f.button :submit, "Favorite this route", class: "btn btn-ghost btn-wide", id:"favorite-button" %>
-  <%= f.button :submit, "Finish", class: "btn btn-flat btn-wide", id:"submit-button" %>
-<% end %>
-
+      </label>
+    </div>
+    <%= f.button :submit, "Favorite this route", class: "btn btn-ghost btn-wide", id:"favorite-button" %>
+    <%= link_to "Finish", routes_path, class: "btn btn-flat btn-wide" %>
+  <% end %>
       </div>
     </div>
   </div>
 </div>
-
+</div>

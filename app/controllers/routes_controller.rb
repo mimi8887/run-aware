@@ -61,8 +61,8 @@ class RoutesController < ApplicationController
         model: "gpt-4o-mini",
         messages: [{ role: "user", content: "
             I am going on a run.
-            Can you please generate a nice name made with 3 words for my run mentionning the name of the neighbourhood
-            (Mitte, Kreuzberg, Neukoelln etc) but not the name of the street of #{@start_address} or #{@end_address}?
+            Can you please generate a nice name made with 3 words for my run mentionning the name of the neighbourhood in Berlin
+            ( Kreuzberg, Neukoelln etc) but not the name of the street of #{@start_address} or #{@end_address}?
             Give me only the name of the run, without any of your own answer like 'Here is a nice name for...'.
             thank you!"
             }]
@@ -85,8 +85,6 @@ class RoutesController < ApplicationController
 
   end
   @route.save
-
-
     @url = "https://api.openweathermap.org/data/2.5/weather?lat=52.52&lon=13.40&appid=93fad4ed2d411554730316c443c0e0df"
     @json = URI.parse(@url).read
     @data = JSON.parse(@json)
@@ -100,7 +98,6 @@ class RoutesController < ApplicationController
       @route.user = current_user
       @route.save
       redirect_to route_path(@route)
-
   end
 
   private

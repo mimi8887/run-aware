@@ -5,52 +5,11 @@
 <%= link_to 'New Route', new_route_path, class: 'btn btn-flat my-4' %>
 
 
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-lg-3 my-6">
-      <div class="form-inputs-new">
-
-<h1>Your route has finished!</h1>
-<!--summary data are hardcoded-->
-<h3>Summary</h3>
-  <div class="inline-p">
-    <div class="grid-container">
-      <div class="distance">
-        <div>Distance</div>
-        <div>10km</div>
-      </div>
-      <div class="time">
-        <div>Total time</div>
-        <div><%= Time.at(@run.ending_time - @run.starting_time).utc.strftime("%H:%M:%S") %></div>
-      </div>
-      <div class="pace">
-        <div>Pace</div>
-        <div>6km/h</div>
-    </div>
-  </div>
-
-<h4 id="comment-heading">Comments</h4>
-<form action="/submit-comment" method="post">
-  <label for="comment"></label><br>
-  <textarea id="comment" name="comment" rows="5" cols="50" placeholder="How did you feel?"></textarea><br><br>
-</form>
-
-<h4>Upload image</h4>
-<%= simple_form_for [ @run, @bookmark ], html: { multipart: true } do |f| %>
-  <div class="upload-container">
-    <label class="upload-box" for="upload-photo">
-      <%= f.input :photo, label: false, as: :file, input_html: { id: "upload-photo", class: "hidden-file-input", accept: "image/*" } %>
-      <img id="image-preview" alt="Preview">
-      <span class="icon"><i class="fa-solid fa-camera-retro"></i></span>
-    </label>
-  </div>
-
-  <%= f.button :submit, "Favorite this route", class: "btn btn-ghost btn-wide", id:"favorite-button" %>
-  <%= f.button :submit, "Finish", class: "btn btn-flat btn-wide", id:"submit-button" %>
+<h1 class="my-2"><%= @run.route.name %></h1>
+<p><strong>Description:</strong> <%= @run.route.description %></p>
+<p><strong>Distance:</strong> <%= @run.route.distance %> km</p>
+<p><strong>Comments:</strong> <%= @bookmark.comment %></p>
+<% @bookmark.photos.each do |photo| %>
+  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
 <% end %>
-
-      </div>
-    </div>
-  </div>
-</div>
- 
+<%= console %>

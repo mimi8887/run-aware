@@ -11,7 +11,7 @@ class RunsController < ApplicationController
     @run.user = current_user
     @run.starting_time = Time.now
     @run.save!
-    redirect_to route_run_running_path(@route, @run)
+    redirect_to run_running_path(@run)
   end
 
   def running
@@ -19,20 +19,20 @@ class RunsController < ApplicationController
     @route = @run.route
   end
 
-  # def show
-  #   @run = Run.find(params[:id])
-  #   @step = @run.route.steps
-  # end
+  def show
+    @run = Run.find(params[:id])
+    @bookmark = Bookmark.find_by(user: current_user, route: @run.route)
+  end
 
   def end_run
     @run = Run.find(params[:id])
     @run.ending_time = Time.now
     @run.save
     # redirect_to edit_run_path(@run)
-    redirect_to run_path(@run)
+    redirect_to summary_path(@run)
   end
 
-  def show
+  def summary
     @run = Run.find(params[:id])
     @route = @run.route
     @bookmark = Bookmark.new

@@ -38,6 +38,10 @@ export default class extends Controller {
         .then(data => {
           const route = data.routes[0].geometry.coordinates;
           console.log(route)
+          const segmentDistance = data.routes[0].distance; // Get distance in meters
+          totalDistance += segmentDistance;
+
+          console.log(totalDistance)
           this.map.on('load', () => {
 
             this.map.addLayer({
@@ -69,7 +73,7 @@ export default class extends Controller {
               padding: {top: 50, bottom: 50, left: 50, right: 50}, // Optional padding around the route
               maxZoom: 15 // Optional maximum zoom level
           });
-          })
+         })
 
         });
     });

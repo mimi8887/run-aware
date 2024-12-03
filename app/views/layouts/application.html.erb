@@ -8,6 +8,7 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    
   </head>
 
   <body>
@@ -19,8 +20,12 @@
       <% end %>
       <div class="container-page">
         <%= yield %>
+        <div><%= render "shared/loading" %></div>
       </div>
+      <% if (controller_name == "routes" || "bookmarks") && action_name == "index"%>
       <div><%= render "shared/footer" %></div>
+      <% else %>
+      <% end %>
     </div>
   </body>
 </html>

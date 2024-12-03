@@ -4,9 +4,9 @@
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 <%= link_to 'New Route', new_route_path, class: 'btn btn-flat my-4' %>
 
-
 <h1 class="my-2"><%= @run.route.name %></h1>
-
 <p><strong>Description:</strong> <%= @run.route.description %></p>
 <p><strong>Distance:</strong> <%= @run.route.distance %> km</p>
-
+<p><strong>Comments:</strong> <%= @bookmark.comment %></p>
+<% @bookmark.photos.each do |photo| %>
+  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>

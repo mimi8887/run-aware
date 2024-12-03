@@ -40,6 +40,6 @@ class BookmarksController < ApplicationController
   private
 
   def bookmark_params
-    params.fetch(:bookmark, {}).permit(:photos)
+    params.fetch(:bookmark, {}).permit(:photos, :comment)
   end
 end

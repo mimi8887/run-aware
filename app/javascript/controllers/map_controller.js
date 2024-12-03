@@ -11,6 +11,9 @@ export default class extends Controller {
   connect() {
     mapboxgl.accessToken = this.apiKeyValue
 
+    console.log(this.markersValue, "MARKERS");
+
+
     this.map = new mapboxgl.Map({
       container: this.element,
       style: "mapbox://styles/mapbox/streets-v10",
@@ -19,46 +22,53 @@ export default class extends Controller {
     })
 
     const steps = this.markersValue;
+    const customMarker_1 = document.createElement("div")
+      customMarker_1.innerHTML = steps[0].marker_html
+      const customMarker_2 = document.createElement("div")
+      customMarker_2.innerHTML = steps[steps.length - 1].marker_html
+      //customMarker.innerHTML = step.marker_html
+    // placing first marker on the map
+    new mapboxgl.Marker(customMarker_1)
+    .setLngLat([ steps[0].longitude, steps[0].latitude ])
+    .addTo(this.map);
+    // placing last marker on the map
+    new mapboxgl.Marker(customMarker_2)
+    .setLngLat([ steps[steps.length - 1].longitude, steps[steps.length - 1].latitude ])
+    .addTo(this.map);
 
     steps.forEach((step, index) => {
-      console.log(step.longitude)
-      console.log(step.latitude)
+      // generating markers for the route but not making it show up on the map
+      new mapboxgl.Marker()
+      .setLngLat([ step.longitude, step.latitude ])
+      // preventing the code to break
 
-      const customMarker = document.createElement("div")
-      customMarker.innerHTML = step.marker_html
-      new mapboxgl.Marker(customMarker)
-            .setLngLat([ step.longitude, step.latitude ])
-            .addTo(this.map)
-
+      if (index + 1 < steps.length) {
 
       const bounds = new mapboxgl.LngLatBounds()
       this.markersValue.forEach(step => bounds.extend([ step.longitude, step.latitude ]))
       this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 })
-
       const url = `https://api.mapbox.com/directions/v5/mapbox/walking/${step.longitude},${step.latitude};${steps[index+ 1].longitude},${steps[index+1].latitude}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          const route = data.routes[0].geometry.coordinates;
-          console.log(route)
-          this.map.on('load', () => {
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            const route = data.routes[0].geometry.coordinates;
 
-            this.map.addLayer({
-              id: `route-${index}`,
-              type: 'line',
-              source: {
-                'type': 'geojson',
-                'data': {
-                  'type': 'Feature',
-                  'properties': {},
-                  'geometry': {
-                    'type': 'LineString',
-                    'coordinates':
-                     route
-                    ,
-                  },
-                }
-              },
+              this.map.addLayer({
+                id: `route-${index}`,
+                type: 'line',
+                source: {
+                  'type': 'geojson',
+                  'data': {
+                    'type': 'Feature',
+                    'properties': {},
+                    'geometry': {
+                      'type': 'LineString',
+                      'coordinates':
+                       route
+                      ,
+                    },
+                  }
+                },
               layout: {
                 'line-join': 'round',
                 'line-cap': 'round'
@@ -72,10 +82,11 @@ export default class extends Controller {
               padding: {top: 50, bottom: 50, left: 50, right: 50}, // Optional padding around the route
               maxZoom: 15 // Optional maximum zoom level
           });
-          })
+        })
+      }
+   });
+    // });
 
-        });
-    });
 
   }
 

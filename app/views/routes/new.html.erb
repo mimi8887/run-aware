@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container" data-controller="loading-animation">
   <div class="row justify-content-center">
     <div class="col-lg-3 my-6">
       <div class="form-inputs">
@@ -13,8 +13,9 @@
           wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV['MAPBOX_API_KEY']}} %>
         <%= f.input :distance, collection: ['5 - 10km', '10 - 15km', '15 - 20km', '20 - 25 km'],
      prompt: 'Select distance', input_html: { class: 'form-control' }, input_html: { class: "custom-form-input" } %>
-        <%= f.submit class: "btn btn-flat btn-wide", id:"submit-button"  %>
+        <%= f.submit class: "btn btn-flat btn-wide", id:"submit-button", data: {action: "click->loading-animation#display"} %>
         <% end %>
+        <div><%= render "shared/loading" %></div>
       </div>
     </div>
   </div>

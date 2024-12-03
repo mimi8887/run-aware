@@ -19,20 +19,27 @@ class BookmarksController < ApplicationController
 
   def create
     @route = Run.find(params[:run_id]).route
-    @bookmark = Bookmark.new(bookmark_params)
-    @bookmark.user = current_user
-    @bookmark.route = @route
-    if @bookmark.save
-      redirect_to bookmarks_path, notice: 'Bookmark criado com sucesso.'
+    @bookmark = Bookmark.find_by(user: current_user, route: @route)
+    if @bookmark.nil?
+      @bookmark = Bookmark.new(bookmark_params)
+      @bookmark.user = current_user
+      @bookmark.route = @route
+       if @bookmark.save
+        redirect_to bookmarks_path, notice: 'Bookmark created successfuly.'
+      else
+        render :new, status: :unprocessable_entity
+      end
     else
-      render :new, status: :unprocessable_entity
+      if params[:bookmark][:photos].present?
+        @bookmark.photos.attach(params[:bookmark][:photos])
+        redirect_to bookmarks_path, notice: 'Photo attached to existing bookmark.'
+      end
     end
   end
-
 
   private
 
   def bookmark_params
-    params.fetch(:bookmark, {}).permit(:photo)
+    params.fetch(:bookmark, {}).permit(:comment, photos: [])
   end
 end

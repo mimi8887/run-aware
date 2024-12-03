@@ -5,19 +5,7 @@ class RoutesController < ApplicationController
 
   def index
     @routes = Route.all
-    @markers = [
-      { lat: 52.48773804724966, lng: 13.383683784580231 },
-      { lat: 52.486351472937, lng: 13.389951169490814 },
-      { lat: 52.481837907201206, lng: 13.395120670145922 },
-      { lat: 52.47744842474273, lng: 13.400204121177599 },
-      { lat: 52.47180112114213, lng: 13.399752206313258 },
-      { lat: 52.46844896928392, lng: 13.394121190369173 },
-      { lat: 52.47068324803367, lng: 13.387429690144542 },
-      { lat: 52.47542334706799, lng: 13.380502925276214 },
-      { lat: 52.48280001108698, lng: 13.379095245741312 },
-      { lat: 52.48773804724966, lng: 13.383683784580231 }
-      ]
-
+    @array = []
   end
 
   def new
@@ -32,12 +20,12 @@ class RoutesController < ApplicationController
       json_start = URI.parse("https://nominatim.openstreetmap.org/search.php?q=#{@start_address}&format=jsonv2").read
       JSON.parse(json_start)
       @start_lat = JSON.parse(json_start)[0]["lat"]
-      @start_long = JSON.parse(json_start)[0]["lng"]
+      @start_long = JSON.parse(json_start)[0]["lon"]
 
       json_end = URI.parse("https://nominatim.openstreetmap.org/search.php?q=#{@end_address}&format=jsonv2").read
       JSON.parse(json_end)
       @end_lat = JSON.parse(json_end)[0]["lat"]
-      @end_long = JSON.parse(json_end)[0]["lng"]
+      @end_long = JSON.parse(json_end)[0]["lon"]
       @distance = @route.distance
 
       client = OpenAI::Client.new
@@ -69,17 +57,21 @@ class RoutesController < ApplicationController
       p chatgpt_response
       p @json
       p @steps
-      @steps.each do |step|
+      @steps.each_with_index do |step, index|
+       if index == 0
         step[:marker_html] = render_to_string(partial: "shared/marker")
+       else
+        step[:marker_html] = render_to_string(partial: "shared/markerarrive")
       end
+    end
 
       client_name = OpenAI::Client.new
       chatgpt_response_name = client_name.chat(parameters: {
         model: "gpt-4o-mini",
         messages: [{ role: "user", content: "
             I am going on a run.
-            Can you please generate a nice name made with 3 words for my run mentionning the name of the neighbourhood
-            (Mitte, Kreuzberg, Neukoelln etc) but not the name of the street of #{@start_address} or #{@end_address}?
+            Can you please generate a nice name made with 3 words for my run mentionning the name of the neighbourhood in Berlin
+            ( Kreuzberg, Neukoelln etc) but not the name of the street of #{@start_address} or #{@end_address}?
             Give me only the name of the run, without any of your own answer like 'Here is a nice name for...'.
             thank you!"
             }]
@@ -103,7 +95,6 @@ class RoutesController < ApplicationController
   end
   @route.save
 
-
     @url = "https://api.openweathermap.org/data/2.5/weather?lat=52.52&lon=13.40&appid=93fad4ed2d411554730316c443c0e0df"
     @json = URI.parse(@url).read
     @data = JSON.parse(@json)
@@ -117,7 +108,6 @@ class RoutesController < ApplicationController
       @route.user = current_user
       @route.save
       redirect_to route_path(@route)
-
   end
 
   private

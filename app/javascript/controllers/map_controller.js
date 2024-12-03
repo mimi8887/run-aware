@@ -24,9 +24,12 @@ export default class extends Controller {
       console.log(step.longitude)
       console.log(step.latitude)
 
-      new mapboxgl.Marker()
+      const customMarker = document.createElement("div")
+      customMarker.innerHTML = step.marker_html
+      new mapboxgl.Marker(customMarker)
             .setLngLat([ step.longitude, step.latitude ])
             .addTo(this.map)
+
 
       const bounds = new mapboxgl.LngLatBounds()
       this.markersValue.forEach(step => bounds.extend([ step.longitude, step.latitude ]))
@@ -61,8 +64,8 @@ export default class extends Controller {
                 'line-cap': 'round'
               },
               paint: {
-                'line-color': '#4e68f8',
-                'line-width': 4
+                'line-color': '#553BD9',
+                'line-width': 5
               }
             })
             this.map.fitBounds(bounds, {

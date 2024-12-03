@@ -1,6 +1,9 @@
 class Bookmark < ApplicationRecord
-  has_one_attached :photo
+  has_many_attached :photo
 
   belongs_to :user
   belongs_to :route
+
+  validates :user, uniqueness: { scope: :route,
+    message: "sorry, already in your bookmark" }
 end

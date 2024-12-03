@@ -6,8 +6,6 @@
   background-color: #f4f4f4;
   // padding: 0.375rem 0.75rem;
   font-size: 1rem;
-  -index: 0 ;
-   position: relative;
   margin-bottom: 15px;
 }
 
@@ -15,7 +13,10 @@
   display: none !important;
 }
 
-
+.first-autocomplete {
+  position: relative;
+  z-index: 2;
+}
 
 .mapboxgl-ctrl-geocoder--input::placeholder {
   color: transparent;
@@ -23,7 +24,7 @@
 }
 
 .mapboxgl-ctrl-geocoder--input {
-  z-index: -1 !important;
+  // z-index: -1 !important;
   padding: 0px 12px !important;
   // display: none !important;
   height: 34.7px;
@@ -33,6 +34,6 @@
 
 
 .suggestions-wrapper {
-  z-index: 100 !important;
-  position: relative;
+//   z-index: 100 !important;
+//   position: relative;
 }

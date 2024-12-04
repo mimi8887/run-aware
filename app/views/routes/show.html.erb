@@ -22,12 +22,13 @@
 <% else %>
 <span><i class="fa-solid fa-cloud-sun"></i></span>
 
-<% end %><span><%= @degree.round(0) %>°C</span>
+<% end %><span style="margin-right: 15px;"><%= @degree.round(0) %>°C</span>
 
 
 <span><i class="fa-solid fa-person-running"></i><%= @route.distance %> km</span>
 
 </div>
+
 
 <p><strong></strong> <%= @route.description %></p>
 
@@ -44,4 +45,3 @@
 <%= link_to 'Start',  route_runs_path(@route), data: { turbo_method: :post}, class: 'btn btn-flat btn-wide-wide {
   width: 100%
 }' %>
-

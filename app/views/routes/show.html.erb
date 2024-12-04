@@ -34,7 +34,7 @@
 
 <p>Tips:</p>
 <% if @tips.present? %>
-  <ul style="list-style-type: none">
+  <ul style="list-style-type: none" class="tips-list">
     <% @tips.each do |tip| %>
       <li><%= tip.strip %></li>
     <% end %>

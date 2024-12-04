@@ -22,6 +22,7 @@ class RunsController < ApplicationController
   def show
     @run = Run.find(params[:id])
     @bookmark = Bookmark.find_by(user: current_user, route: @run.route)
+    @steps_as_json = @run.route.steps_as_json
   end
 
   def end_run

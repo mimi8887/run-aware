@@ -24,14 +24,13 @@
 
 <% end %><span><%= @degree.round(0) %>°C</span>
 
-<span><i class="fa-solid fa-person-running"></i><%= @distance_in_km %> km</span>
+<span><i class="fa-solid fa-person-running"></i><%= @route.distance %> km</span>
 
 </div>
 
 <p><strong></strong> <%= @route.description %></p>
-
+<%= console %>
 
 <%= link_to 'Start',  route_runs_path(@route), data: { turbo_method: :post}, class: 'btn btn-flat btn-wide-wide {
   width: 100%
 }' %>
-

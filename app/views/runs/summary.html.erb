@@ -25,7 +25,7 @@
 
   <%= simple_form_for [ @run, @bookmark ], html: { multipart: true } do |f| %>
     <h4 id="comment-heading">Comments</h4>
-    <%= f.input :comment,  placeholder: "How do you feel", as: :text, input_html: { rows: "10" }, input_html: { class: "custom-form-input" } %>
+    <%= f.input :comment, label: false,  placeholder: "How do you feel", as: :text, input_html: { rows: "10" }, input_html: { class: "custom-form-input" } %>
 
     <h4>Upload image</h4>
     <div class="upload-container">
@@ -36,7 +36,7 @@
       </label>
     </div>
     <%= f.button :submit, "Favorite this route", class: "btn btn-ghost btn-wide", id:"favorite-button" %>
-    <%= link_to "Finish", routes_path, class: "btn btn-flat btn-wide" %>
+    <%= link_to "Finish", routes_path, class: "btn btn-flat-sum btn-wide" %>
   <% end %>
       </div>
     </div>

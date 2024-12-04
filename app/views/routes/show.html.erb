@@ -4,7 +4,9 @@
   data-map-markers-value="<%= @steps.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 <%= link_to 'New Route', new_route_path, class: 'btn btn-flat my-4' %>
-<%= link_to "refresh", route_path(@route) %>
+<%= link_to route_path(@route), class: 'btn btn-ghost btn-ghost-refresh' do %>
+  <i class="fa-solid fa-rotate-right"></i> Refresh
+<% end %>
 <h1 class="my-2"><%= @route.name %></h1>
 
 <div class="weather">
@@ -19,12 +21,17 @@
 <span><i class="fa-solid fa-snowflake"></i></span>
 <% else %>
 <span><i class="fa-solid fa-cloud-sun"></i></span>
+
 <% end %><span><%= @degree.round(0) %>°C</span>
 
 <span><i class="fa-solid fa-person-running"></i><%= @distance_in_km %> km</span>
+
 </div>
 
 <p><strong></strong> <%= @route.description %></p>
 
-<%= console %>
-<%= link_to 'Start',  route_runs_path(@route), data: { turbo_method: :post}, class: 'btn btn-flat' %>
+
+<%= link_to 'Start',  route_runs_path(@route), data: { turbo_method: :post}, class: 'btn btn-flat btn-wide-wide {
+  width: 100%
+}' %>
+

@@ -101,6 +101,7 @@ class RoutesController < ApplicationController
     @temperature = @data['main']['temp']
     @degree = @temperature.to_f - 273.15
     @weather = @data['weather'][0]['main']
+    @distance_in_km = fake_distance(@route.distance)
   end
 
   def create
@@ -112,8 +113,23 @@ class RoutesController < ApplicationController
 
   private
 
+  def fake_distance(selected_distance)
+    case selected_distance
+    when '5 - 10km'
+      rand(5..10)
+    when '10 - 15km'
+      rand(10..15)
+    when '15 - 20km'
+      rand(15..20)
+    when '20 - 25 km'
+      rand(20..25)
+    else
+      rand(5..25)
+    end
+  end
+
   def route_params
-    params.require(:route).permit(:start_address, :end_address)
+    params.require(:route).permit(:start_address, :end_address, :distance)
   end
 
   def results

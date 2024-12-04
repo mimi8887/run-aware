@@ -24,7 +24,7 @@ class BookmarksController < ApplicationController
       @bookmark = Bookmark.new(bookmark_params)
       @bookmark.user = current_user
       @bookmark.route = @route
-       if @bookmark.save
+             if @bookmark.save
           redirect_to bookmarks_path, notice: 'Bookmark created successfuly.'
         else
           render :new, status: :unprocessable_entity

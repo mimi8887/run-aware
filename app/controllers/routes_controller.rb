@@ -89,11 +89,17 @@ class RoutesController < ApplicationController
           })
       @route.description = chatgpt_response_description["choices"][0]["message"]["content"]
     else
-    @steps = @route.steps.select(:latitude, :longitude).order(:position).as_json
+      @steps = @route.steps.select(:latitude, :longitude).order(:position).as_json
+
+    end
+    @route.save
+
+
 
   end
   @route.distance = fake_distance(@route.distance)
   @route.save
+
 
     @url = "https://api.openweathermap.org/data/2.5/weather?lat=52.52&lon=13.40&appid=93fad4ed2d411554730316c443c0e0df"
     @json = URI.parse(@url).read
@@ -105,6 +111,23 @@ class RoutesController < ApplicationController
 
   end
 
+
+    tips_description = OpenAI::Client.new
+    chatgpt_response_tips = tips_description.chat(parameters: {
+      model: "gpt-4o-mini",
+      messages: [{ role: "user", content: "
+         I am going on a run.
+          Can you please generate two nice tips for runners in Berlin on what they should wear depending on the weather today.
+          The tips should be only 1 sentence with maximum 5 words and emojis as index and dont use any number as index please.
+          Every tip should be on a different paragraph.
+          The temperature is #{@degree} degrees today. Please don't add any comments or extra text from you.
+          thank you!"
+           }]
+        })
+
+    @tips = chatgpt_response_tips["choices"][0]["message"]["content"].gsub("\n", " ").split(/(?=\d+\.\s)/).map(&:strip)
+
+      end
   def create
       @route = Route.new(route_params)
       @route.user = current_user

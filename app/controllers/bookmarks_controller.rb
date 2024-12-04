@@ -28,6 +28,7 @@ class BookmarksController < ApplicationController
           redirect_to bookmarks_path, notice: 'Bookmark created successfuly.'
         else
           render :new, status: :unprocessable_entity
+
       end
     else
       if params[:bookmark][:photos].present?

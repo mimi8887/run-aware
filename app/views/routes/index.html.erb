@@ -14,7 +14,11 @@
 <div class="cards_container">
   <% @routes.each do |route| %>
       <div class="card-run">
+       <% if route.photo.attached? %>
         <%= cl_image_tag route.photo.key, width: 124, height: 124, crop: :fill, class: "image-card" %>
+          <% else %>
+        <%= image_tag "map.png",  width: 124, crop: :fill, class: "image-card" %>
+          <% end %>
         <div class="card-run-infos">
           <h2><%= link_to route.name, route_path(route) %></h2>
           <div class="card-text-icon">

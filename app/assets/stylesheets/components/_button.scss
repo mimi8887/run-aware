@@ -46,12 +46,26 @@
   border: 2px solid #553BD9;;
   font-size: 16px;
 
+
   // width: 100vw;
-  margin: 0px 24px;
+  margin: 0px 2px;
 
   font-weight: bold;
 }
 
+.btn-flat-newroute {
+  color: white;
+  padding: 8px 75px;
+  border-radius: 8px;
+  background: #553BD9;
+  transition: background 0.3s ease;
+  box-shadow: 0 0 15px rgba(237,231,250,0.8);
+  border: 2px solid #553BD9;;
+  font-size: 18px;
+  margin: 8px 0px;
+
+  font-weight: bold;
+}
 
 
 .btn-flat:hover {
@@ -63,6 +77,17 @@
   color: #553BD9;
   border: 2px solid #553BD9;
   font-weight: 400;
+  padding: 12px 24px;
+  border-radius: 8px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  font-size: 16px;
+}
+
+.btn-ghost-refresh {
+  color: #553BD9;
+  border: 2px solid #553BD9;
+  font-weight: bold;
   padding: 12px 24px;
   border-radius: 8px;
   opacity: 0.6;
@@ -118,7 +143,7 @@
   color: #FFFFFF;
 }
 
-.btn-repeat{
+.btn-repeat {
   color: white;
   padding: 7px 12px;
   border-radius: 100px;
@@ -135,4 +160,24 @@
 .btn-repeat:hover {
   background: #001DB8;
   color: #FFFFFF;
+}
+
+.btn-wide-wide {
+  width: 100%;
+  margin: 0px 0px;
+}
+
+.btn-flat-sum {
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  background: #553BD9;
+  transition: background 0.3s ease;
+  box-shadow: 0 0 15px rgba(237,231,250,0.8);
+  border: 2px solid #553BD9;;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  margin-bottom: 0px;
 }

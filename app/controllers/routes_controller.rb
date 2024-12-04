@@ -54,16 +54,15 @@ class RoutesController < ApplicationController
 
       @json = chatgpt_response["choices"][0]["message"]["content"]
       @steps = JSON.parse(@json)
-      p chatgpt_response
-      p @json
-      p @steps
+
       @steps.each_with_index do |step, index|
-       if index == 0
-        step[:marker_html] = render_to_string(partial: "shared/marker")
-       else
-        step[:marker_html] = render_to_string(partial: "shared/markerarrive")
+        if index == 0
+          step[:marker_html] = render_to_string(partial: "shared/marker")
+        else
+          step[:marker_html] = render_to_string(partial: "shared/markerarrive")
+        end
       end
-    end
+      @route.steps_as_json = @steps.to_json
 
       client_name = OpenAI::Client.new
       chatgpt_response_name = client_name.chat(parameters: {
@@ -82,7 +81,7 @@ class RoutesController < ApplicationController
         model: "gpt-4o-mini",
         messages: [{ role: "user", content: "
             I am going on a run.
-            Can you please generate a very simple description for my run made with 2 sentences,
+            Can you please generate a very simple description for my run made with 1 sentence made with maximum 7 words,
             focusing on the neighbourhood (Mitte, Kreuzberg, Neukoelln etc) of #{@start_address} or #{@end_address}?
             Give me only the description of the run, without any of your own answer like 'Here is a nice name for...'.
             thank you!"
@@ -97,12 +96,21 @@ class RoutesController < ApplicationController
 
 
 
+  end
+  @route.distance = fake_distance(@route.distance)
+  @route.save
+
+
     @url = "https://api.openweathermap.org/data/2.5/weather?lat=52.52&lon=13.40&appid=93fad4ed2d411554730316c443c0e0df"
     @json = URI.parse(@url).read
     @data = JSON.parse(@json)
     @temperature = @data['main']['temp']
     @degree = @temperature.to_f - 273.15
     @weather = @data['weather'][0]['main']
+
+
+  end
+
 
     tips_description = OpenAI::Client.new
     chatgpt_response_tips = tips_description.chat(parameters: {
@@ -129,8 +137,23 @@ class RoutesController < ApplicationController
 
   private
 
+  def fake_distance(selected_distance)
+    case selected_distance
+    when '5 - 10km'
+      rand(5..10)
+    when '10 - 15km'
+      rand(10..15)
+    when '15 - 20km'
+      rand(15..20)
+    when '20 - 25 km'
+      rand(20..25)
+    else
+      rand(5..25)
+    end
+  end
+
   def route_params
-    params.require(:route).permit(:start_address, :end_address)
+    params.require(:route).permit(:start_address, :end_address, :distance)
   end
 
   def results

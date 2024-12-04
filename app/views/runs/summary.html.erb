@@ -1,7 +1,3 @@
-
-
-
-
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-lg-3 my-6">
@@ -29,18 +25,19 @@
 
   <%= simple_form_for [ @run, @bookmark ], html: { multipart: true } do |f| %>
     <h4 id="comment-heading">Comments</h4>
-    <%= f.input :comment,  placeholder: "How do you feel", as: :text, input_html: { rows: "10" }, input_html: { class: "custom-form-input" } %>
+
+    <%= f.input :comment,  placeholder: "How do you feel?", as: :text, input_html: { rows: "10" }, input_html: { class: "custom-form-input" } %>
 
     <h4>Upload image</h4>
     <div class="upload-container">
       <label class="upload-box" for="upload-photo">
-      <%= f.input :photos, label: false, as: :file, input_html: { id: "upload-photo", class: "hidden-file-input", accept: "image/*" } %>
+      <%= f.input :photos, label: false, as: :file, input_html: { id: "upload-photo", multiple: true, class: "hidden-file-input", accept: "image/*" } %>
       <img id="image-preview" alt="Preview">
       <span class="icon"><i class="fa-solid fa-camera-retro"></i></span>
       </label>
     </div>
     <%= f.button :submit, "Favorite this route", class: "btn btn-ghost btn-wide", id:"favorite-button" %>
-    <%= link_to "Finish", routes_path, class: "btn btn-flat btn-wide" %>
+    <%= link_to "Finish", routes_path, class: "btn btn-flat-sum btn-wide" %>
   <% end %>
       </div>
     </div>

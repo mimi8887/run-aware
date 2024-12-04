@@ -9,7 +9,13 @@
 <p><strong>Description:</strong> <%= @run.route.description %></p>
 <p><strong>Distance:</strong> <%= @run.route.distance %> km</p>
 <p><strong>Comments:</strong> <%= @bookmark.comment %></p>
+
+<div class="carousel-item">
 <% @bookmark.photos.each do |photo| %>
-  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+  <%= cl_image_tag photo.key, height: 300, width: 300, crop: :fill %>
 <% end %>
-<%= console %>
+  <div class="carousel-caption d-none d-md-block">
+    <h5>...</h5>
+    <p>...</p>
+  </div>
+</div>

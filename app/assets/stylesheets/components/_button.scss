@@ -47,7 +47,7 @@
   font-size: 16px;
 
   // width: 100vw;
-  margin: 0px 24px;
+  margin: 0px 2px;
 
   font-weight: bold;
 }
@@ -63,6 +63,17 @@
   color: #553BD9;
   border: 2px solid #553BD9;
   font-weight: 400;
+  padding: 12px 24px;
+  border-radius: 8px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  font-size: 16px;
+}
+
+.btn-ghost-refresh {
+  color: #553BD9;
+  border: 2px solid #553BD9;
+  font-weight: bold;
   padding: 12px 24px;
   border-radius: 8px;
   opacity: 0.6;
@@ -118,7 +129,7 @@
   color: #FFFFFF;
 }
 
-.btn-repeat{
+.btn-repeat {
   color: white;
   padding: 7px 12px;
   border-radius: 100px;
@@ -135,4 +146,9 @@
 .btn-repeat:hover {
   background: #001DB8;
   color: #FFFFFF;
+}
+
+.btn-wide-wide {
+  width: 100%;
+  margin: 0px 0px;
 }

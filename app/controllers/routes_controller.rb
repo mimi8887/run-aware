@@ -93,10 +93,6 @@ class RoutesController < ApplicationController
 
     end
     @route.save
-
-
-
-  end
   @route.distance = fake_distance(@route.distance)
   @route.save
 
@@ -108,8 +104,6 @@ class RoutesController < ApplicationController
     @degree = @temperature.to_f - 273.15
     @weather = @data['weather'][0]['main']
 
-
-  end
 
 
     tips_description = OpenAI::Client.new
@@ -126,8 +120,8 @@ class RoutesController < ApplicationController
         })
 
     @tips = chatgpt_response_tips["choices"][0]["message"]["content"].gsub("\n", " ").split(/(?=\d+\.\s)/).map(&:strip)
+  end
 
-      end
   def create
       @route = Route.new(route_params)
       @route.user = current_user

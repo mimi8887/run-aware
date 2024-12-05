@@ -2,7 +2,11 @@
   <div class="my-4">
   <% @bookmarks.each do |bookmark| %>
       <div class="card-run my-3">
+        <% if bookmark.photos.attached? %>
+        <%= cl_image_tag bookmark.photos.first.key, width: 124, height: 124, crop: :fill, class: "image-card" %>
+          <% else %>
         <%= image_tag "map.png",  width: 124, crop: :fill, class: "image-card" %>
+          <% end %>
         <div class="card-run-infos">
           <h2><%= link_to bookmark.route.name, run_path(bookmark.route.runs.last) %></h2>
 

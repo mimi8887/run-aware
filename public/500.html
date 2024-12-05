@@ -49,32 +49,36 @@ h2{
   margin: 10px;
 }
 
+.container-page-child {
+  margin: 104px 24px 24px 24px;
+}
 
 </style>
 </head>
-
 <body class="rails-default-error-page">
   <!-- This file lives in public/500.html -->
   <div class="navbar navbar-expand-sm navbar-light navbar-runware-parent">
     <a  href="" >
-       <img src="logo.png", alt="Logo", width: 160, height: 40>
+      <img src="logo.png", alt="Logo", width: 160, height: 40>
     </a>
-</div>
-  <div>
-    <div>
-      <h2>Oops! It looks like our AI took a wrong turn and got lost on the way...</h2>
-    </div>
-    <div class="message">
-      <p>Don't worry, the route will be recalculated again. Please enter the address one more time!<p>
-    </div>
-    </div>
   </div>
+  <div class="container-page-child">
+    <div>
+      <div>
+        <h2>Oops! It looks like our AI took a wrong turn and got lost on the way...</h2>
+      </div>
+      <div class="message">
+        <p>Don't worry, the route will be recalculated again. Please enter the address one more time!<p>
+      </div>
+      </div>
+    </div>
 
-</body>
-<script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-<div id="loader" class="d-none" data-loading-animation-target="loader">
-  <dotlottie-player src="https://lottie.host/9557657f-3151-4e2c-82d6-d78b6c3dc066/KTbyzV32xa.lottie"
-  background="transparent" speed="1" style="width: 100vw; height: 100vh; position: relative; object-fit: cover;
-    object-position: center;" loop autoplay></dotlottie-player>
+  </body>
+  <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+  <div id="loader" class="d-none" data-loading-animation-target="loader">
+    <dotlottie-player src="https://lottie.host/9557657f-3151-4e2c-82d6-d78b6c3dc066/KTbyzV32xa.lottie"
+    background="transparent" speed="1" style="width: 100vw; height: 100%; position: relative; object-fit: cover;
+      object-position: center;" loop autoplay></dotlottie-player>
+  </div>
 </div>
 </html>

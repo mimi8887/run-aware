@@ -22,7 +22,19 @@ class RunsController < ApplicationController
   def show
     @run = Run.find(params[:id])
     @bookmark = Bookmark.find_by(user: current_user, route: @run.route)
-    @steps_as_json = @run.route.steps_as_json
+    if @run.route.steps_as_json.nil?
+      @steps = @run.route.steps.select(:latitude, :longitude).order(:position).as_json
+      # markers
+      @steps.each_with_index do |step, index|
+        if index == 0
+          step[:marker_html] = render_to_string(partial: "shared/marker")
+        else
+          step[:marker_html] = render_to_string(partial: "shared/markerarrive")
+        end
+      end
+    else
+      @steps = JSON.parse(@run.route.steps_as_json)
+    end
   end
 
   def end_run

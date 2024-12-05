@@ -4,6 +4,7 @@
       <div class="card-run my-3">
         <%= image_tag "map.png",  width: 124, crop: :fill, class: "image-card" %>
         <div class="card-run-infos">
+          <%# Suggestion: wrap link_to around entire card to make it clickable (with do end syntax) %>
           <h2><%= link_to bookmark.route.name, run_path(bookmark.route.runs.last) %></h2>
 
           <div class="card-text-icon ">

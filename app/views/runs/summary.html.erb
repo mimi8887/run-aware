@@ -1,12 +1,16 @@
 <div class="container">
+  <%= turbo_frame_tag :summary_modal, target: "_top" do %>
   <div class="row justify-content-center">
     <div class="col-lg-3 my-6">
       <div class="form-inputs-new">
 
-<h1>Your route has finished!</h1>
+  <div class="modal-content-title">
+    <h1>Your route has finished!</h1>
+    <button type="button" class="btn-close" aria-label="Close" data-action="modal#hide"></button>
+  </div>
 
 <!--summary data are hardcoded-->
-<h3>Summary</h3>
+    <h3>Summary</h3>
   <div class="inline-p">
     <div class="grid-container">
       <div class="distance">
@@ -26,7 +30,7 @@
   <%= simple_form_for [ @run, @bookmark ], html: { multipart: true } do |f| %>
     <h4 id="comment-heading">Comments</h4>
 
-    <%= f.input :comment,  placeholder: "How do you feel?", as: :text, input_html: { rows: "10" }, input_html: { class: "custom-form-input" } %>
+    <%= f.input :comment, label: false, placeholder: "How do you feel?", as: :text, input_html: { rows: "10" }, input_html: { class: "custom-form-input" } %>
 
     <h4>Upload image</h4>
     <div class="upload-container">
@@ -36,11 +40,12 @@
       <span class="icon"><i class="fa-solid fa-camera-retro"></i></span>
       </label>
     </div>
-    <%= f.button :submit, "Favorite this route", class: "btn btn-ghost btn-wide", id:"favorite-button" %>
-    <%= link_to "Finish", routes_path, class: "btn btn-flat-sum btn-wide" %>
+    <%= f.button :submit, "Favorite this route", class: "btn btn-ghost btn-wide", id:"favorite-button", data: { turbo_frame: "_top" } %>
+    <%= link_to "Finish", routes_path, class: "btn btn-flat-sum btn-wide", data: { turbo_frame: "_top" } %>
   <% end %>
       </div>
     </div>
   </div>
 </div>
+<% end %>
 </div>

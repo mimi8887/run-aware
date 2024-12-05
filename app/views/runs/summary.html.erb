@@ -15,7 +15,7 @@
     <div class="grid-container">
       <div class="distance">
         <div>Distance</div>
-        <div>10km</div>
+        <div><%= ((Time.at(@run.ending_time - @run.starting_time)).to_i * ( 8 / 3600.0)).round(2) %> km</div>
       </div>
       <div class="time">
         <div>Total time</div>
@@ -23,7 +23,7 @@
       </div>
       <div class="pace">
         <div>Pace</div>
-        <div>6km/h</div>
+        <div>8 km/h</div>
     </div>
   </div>
 

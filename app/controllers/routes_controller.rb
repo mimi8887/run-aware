@@ -117,7 +117,7 @@ class RoutesController < ApplicationController
       model: "gpt-4o-mini",
       messages: [{ role: "user", content: "
          I am going on a run.
-          Can you please generate two nice tips for runners in Berlin on what they should wear depending on the weather today.
+          Can you please generate four nice tips for runners in Berlin on what they should wear depending on the weather today.
           The tips should be only 1 sentence with maximum 5 words and emojis as index and dont use any number as index please.
           Every tip should be on a different paragraph.
           The temperature is #{@degree} degrees today. Please don't add any comments or extra text from you.
@@ -125,8 +125,10 @@ class RoutesController < ApplicationController
            }]
         })
 
-    @tips = chatgpt_response_tips["choices"][0]["message"]["content"].gsub("\n", " ").split(/(?=\d+\.\s)/).map(&:strip)
+        #@tips = chatgpt_response_tips["choices"][0]["message"]["content"].gsub("\n", " ").split(/(?=\d+\.\s)/).map(&:strip)
+        @tips = chatgpt_response_tips["choices"][0]["message"]["content"].split("\n\n").map(&:strip)
   end
+
 
   def create
       @route = Route.new(route_params)

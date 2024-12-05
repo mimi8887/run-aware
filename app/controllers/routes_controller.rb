@@ -14,7 +14,7 @@ class RoutesController < ApplicationController
 
   def show
     @route = Route.find(params[:id])
-    if @route == Route.last
+    if request.referer.split("/").last == "new"
       @start_address = I18n.transliterate(@route.start_address)
       @end_address = I18n.transliterate(@route.end_address)
       json_start = URI.parse("https://nominatim.openstreetmap.org/search.php?q=#{@start_address}&format=jsonv2").read
@@ -70,7 +70,7 @@ class RoutesController < ApplicationController
         messages: [{ role: "user", content: "
             I am going on a run.
             Can you please generate a nice name made with 3 words for my run mentionning the name of the neighbourhood in Berlin
-            ( Kreuzberg, Neukoelln etc) but not the name of the street of #{@start_address} or #{@end_address}?
+            (Mitte, Kreuzberg, Neukoelln etc) but not the name of the street of #{@start_address} or #{@end_address}?
             Give me only the name of the run, without any of your own answer like 'Here is a nice name for...'.
             thank you!"
             }]
@@ -90,7 +90,13 @@ class RoutesController < ApplicationController
       @route.description = chatgpt_response_description["choices"][0]["message"]["content"]
     else
       @steps = @route.steps.select(:latitude, :longitude).order(:position).as_json
-
+      @steps.each_with_index do |step, index|
+        if index == 0
+          step[:marker_html] = render_to_string(partial: "shared/marker")
+        else
+          step[:marker_html] = render_to_string(partial: "shared/markerarrive")
+        end
+      end
     end
     @route.save
   @route.distance = fake_distance(@route.distance)
@@ -111,7 +117,7 @@ class RoutesController < ApplicationController
       model: "gpt-4o-mini",
       messages: [{ role: "user", content: "
          I am going on a run.
-          Can you please generate two nice tips for runners in Berlin on what they should wear depending on the weather today.
+          Can you please generate four nice tips for runners in Berlin on what they should wear depending on the weather today.
           The tips should be only 1 sentence with maximum 5 words and emojis as index and dont use any number as index please.
           Every tip should be on a different paragraph.
           The temperature is #{@degree} degrees today. Please don't add any comments or extra text from you.
@@ -119,8 +125,10 @@ class RoutesController < ApplicationController
            }]
         })
 
-    @tips = chatgpt_response_tips["choices"][0]["message"]["content"].gsub("\n", " ").split(/(?=\d+\.\s)/).map(&:strip)
+        #@tips = chatgpt_response_tips["choices"][0]["message"]["content"].gsub("\n", " ").split(/(?=\d+\.\s)/).map(&:strip)
+        @tips = chatgpt_response_tips["choices"][0]["message"]["content"].split("\n\n").map(&:strip)
   end
+
 
   def create
       @route = Route.new(route_params)

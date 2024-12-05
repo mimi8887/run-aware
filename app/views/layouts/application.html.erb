@@ -14,16 +14,16 @@
   <body>
     <div class="page-container">
       <% if (controller_name == "routes" || "bookmarks") && action_name == "index"%>
-      <div><%= render "shared/navbar-parent" %></div>
-      <% else %>
-      <div><%= render "shared/navbar-child" %></div>
-      <% end %>
-      <div class="container-page">
+        <div><%= render "shared/navbar-parent" %></div>
+        <div class="container-page">
+          <%= yield %>
+        </div>
+        <div><%= render "shared/footer" %></div>
+        <% else %>
+        <div><%= render "shared/navbar-child" %></div>
+        <div class="container-page-child">
         <%= yield %>
-      </div>
-      <% if (controller_name == "routes" || "bookmarks") && action_name == "index"%>
-      <div><%= render "shared/footer" %></div>
-      <% else %>
+        </div>
       <% end %>
     </div>
   </body>

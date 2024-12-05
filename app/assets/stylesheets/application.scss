@@ -49,8 +49,22 @@ h2 a {
   font-weight: bold;
 }
 
+h5 {
+  font-size: 12px;
+  color: #333333;
+  font-weight: bold;
+}
+ul {
+  color: #333333;
+}
+
 .container-page {
   margin: 104px 24px;
+  background: #ffffff;
+}
+
+.container-page-child {
+  margin: 104px 24px 24px 24px;
   background: #ffffff;
 }
 

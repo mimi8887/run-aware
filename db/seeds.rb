@@ -95,6 +95,10 @@ tiergarden_run.photo.attach(io: URI.open("https://res.cloudinary.com/dlmjemn37/i
                             filename: "tiergarten_scenic_loop.jpg", content_type: "image/jpeg")
 tiergarden_bookmark.photos.attach(io: URI.open("https://res.cloudinary.com/dlmjemn37/image/upload/v1733395473/f28d82ae-f63e-4b6c-9d9f-502aad7dd310_v0yqy0.jpg"),
                                  filename: "tiergarten_scenic_loop.jpg", content_type: "image/jpeg")
+tiergarden_bookmark.photos.attach(io: URI.open("https://res.cloudinary.com/dlmjemn37/image/upload/v1733406880/IMG_6838_eezham.png"),
+                                 filename: "tiergarten_scenic_loop.jpg", content_type: "image/png")
+tiergarden_bookmark.photos.attach(io: URI.open("https://res.cloudinary.com/dlmjemn37/image/upload/v1733406879/7cfc32d9-8994-4951-90da-4a610b5971c5_ku2zxp.jpg"),
+                                 filename: "tiergarten_scenic_loop2.jpg", content_type: "image/jpeg")
 
 puts "Created #{Route.count} routes!"
 puts "Created #{User.count} users!"

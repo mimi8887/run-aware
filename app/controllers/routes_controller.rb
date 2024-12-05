@@ -90,7 +90,13 @@ class RoutesController < ApplicationController
       @route.description = chatgpt_response_description["choices"][0]["message"]["content"]
     else
       @steps = @route.steps.select(:latitude, :longitude).order(:position).as_json
-
+      @steps.each_with_index do |step, index|
+        if index == 0
+          step[:marker_html] = render_to_string(partial: "shared/marker")
+        else
+          step[:marker_html] = render_to_string(partial: "shared/markerarrive")
+        end
+      end
     end
     @route.save
   @route.distance = fake_distance(@route.distance)

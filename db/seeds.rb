@@ -19,6 +19,12 @@ kreuzberg_run = Route.create(
   start_address: "Großbeerenstraße 32",
   end_address: "Hermannstraße 233"
 )
+puts 'creating steps'
+Step.create(latitude: 52.48578717128562, longitude: 13.38588414869865, position: 0, route: kreuzberg_run)
+Step.create(latitude: 52.48293683457218, longitude: 13.394251634598700, position: 1, route: kreuzberg_run)
+Step.create(latitude: 52.47263456794273, longitude: 13.401832172346290, position: 1, route: kreuzberg_run)
+Step.create(latitude: 52.46783249127386, longitude: 13.386942103478290, position: 1, route: kreuzberg_run)
+Step.create(latitude: 52.48773804724967, longitude: 13.383683784580232, position: 1, route: kreuzberg_run)
 
 prenztlauer_run = Route.create(
   name: "Prenzlauer Berg Pathway",

@@ -17,6 +17,7 @@ class RunsController < ApplicationController
   def running
     @run = Run.find(params[:run_id])
     @route = @run.route
+    @bookmark = Bookmark.find_by(user: current_user, route: @run.route) || Bookmark.new
   end
 
   def show

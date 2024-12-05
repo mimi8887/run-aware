@@ -2,4 +2,19 @@
 <div class="gif">
 <img src="https://res.cloudinary.com/dlmjemn37/image/upload/v1733322268/running-gif_upkibk.gif" alt="Running GIF" width="342">
 </div>
-<%= link_to 'Stop run',  end_run_path(@run), data: { turbo_method: :patch}, class: 'btn btn-running' %>
+
+<div data-controller="modal">
+  <%= link_to 'Stop run',  end_run_path(@run), data: {
+    turbo_method: :patch,
+    turbo_frame: :summary_modal,
+    action: "click->modal#display"
+    }, class: 'btn btn-running' %>
+
+  <div id="summary-modal-content" class="d-none" data-modal-target="modal">
+    <%= turbo_frame_tag :summary_modal do %>
+    <% end %>
+  </div>
+
+  <div id="summary-modal-backdrop" class="d-none" data-modal-target="modal">
+  </div>
+</div>

@@ -1,5 +1,6 @@
 <div class="container">
   <%= turbo_frame_tag :summary_modal, target: "_top" do %>
+
   <div class="row justify-content-center">
     <div class="col-lg-3 my-6">
       <div class="form-inputs-new">
@@ -10,6 +11,7 @@
   </div>
 
 <!--summary data are hardcoded-->
+<div data-controller="confetti">
     <h3>Summary</h3>
   <div class="inline-p">
     <div class="grid-container">
@@ -26,6 +28,7 @@
         <div>6km/h</div>
     </div>
   </div>
+</div>
 
   <%= simple_form_for [ @run, @bookmark ], html: { multipart: true } do |f| %>
     <h4 id="comment-heading">Comments</h4>

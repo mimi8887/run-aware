@@ -14,7 +14,7 @@ class RoutesController < ApplicationController
 
   def show
     @route = Route.find(params[:id])
-    if @route == Route.last
+    if request.referer.split("/").last == "new"
       @start_address = I18n.transliterate(@route.start_address)
       @end_address = I18n.transliterate(@route.end_address)
       json_start = URI.parse("https://nominatim.openstreetmap.org/search.php?q=#{@start_address}&format=jsonv2").read
@@ -70,7 +70,7 @@ class RoutesController < ApplicationController
         messages: [{ role: "user", content: "
             I am going on a run.
             Can you please generate a nice name made with 3 words for my run mentionning the name of the neighbourhood in Berlin
-            ( Kreuzberg, Neukoelln etc) but not the name of the street of #{@start_address} or #{@end_address}?
+            (Mitte, Kreuzberg, Neukoelln etc) but not the name of the street of #{@start_address} or #{@end_address}?
             Give me only the name of the run, without any of your own answer like 'Here is a nice name for...'.
             thank you!"
             }]

@@ -125,8 +125,10 @@ class RoutesController < ApplicationController
            }]
         })
 
-    @tips = chatgpt_response_tips["choices"][0]["message"]["content"].gsub("\n", " ").split(/(?=\d+\.\s)/).map(&:strip)
+        #@tips = chatgpt_response_tips["choices"][0]["message"]["content"].gsub("\n", " ").split(/(?=\d+\.\s)/).map(&:strip)
+        @tips = chatgpt_response_tips["choices"][0]["message"]["content"].split("\n\n").map(&:strip)
   end
+
 
   def create
       @route = Route.new(route_params)
